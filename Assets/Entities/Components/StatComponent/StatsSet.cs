@@ -6,7 +6,14 @@ using System.Diagnostics;
 [CreateAssetMenu(fileName = "StatsSet", menuName = "Scriptable Objects/StatsSet")]
 public class StatsSet : ScriptableObject
 {
-    [SerializeField] private List<Stats> statsList = new List<Stats>();
+    [SerializeField] private List<Stats> statsList = new List<Stats> {
+        new Stats(StatType.HEALTH, 100.0f, true, 100.0f),
+        new Stats(StatType.HEALTH_REGEN, 0.25f, false, 0.0f),
+        new Stats(StatType.ATTACK, 100.0f, false, 0.0f), 
+        new Stats(StatType.ATTACK_SPEED, 2.0f, false, 0.0f),
+        new Stats(StatType.ARMOR, 0.0f, false, 0.0f),
+        new Stats(StatType.MOVEMENT_SPEED, 100.0f, false, 0.0f)
+    };
 
     public List<Stats> GetStatsList()
     {

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Data;
@@ -63,6 +64,30 @@ public class StatsComponent : MonoBehaviour
         }
 
         return false;
+    }
+
+    public Stats GetStats(StatType type)
+    {
+        Stats stat = statsSet.GetStatsInCurrentList(type);
+        if (stat == null)
+        {
+            UnityEngine.Debug.LogWarning("Trying to access non-existing stat!");
+            return null;
+        }
+
+        return stat;
+    }
+
+    public void SubscribeToStat(StatType type, Action<float, float, float> listener)
+    {
+        Stats stat = GetStats(type);
+        stat.OnStatChanged += listener;
+    }
+
+    public void UnSubscribeToStat(StatType type, Action<float, float, float> listener)
+    {
+        Stats stat = GetStats(type);
+        stat.OnStatChanged -= listener;
     }
 
     void Start()
