@@ -18,10 +18,10 @@ public class Player : MonoBehaviour
         inputActions.FindActionMap("Player").Enable();
     }
 
-    void OnDisable()
-    {
-        inputActions.FindActionMap("Player").Disable();
-    }
+    // void OnDisable()
+    // {
+    //     inputActions.FindActionMap("Player").Disable();
+    // }
     
     void Awake()
     {

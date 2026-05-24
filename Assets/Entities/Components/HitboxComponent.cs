@@ -37,6 +37,8 @@ public class HitboxComponent : MonoBehaviour
             hurtbox.TakeDamge(damageAmount);
         }
 
+        UnityEngine.Debug.Log(gameObject.name + " just hit " + hitInfo.name);
+
         SelfDestruct();
     }
 

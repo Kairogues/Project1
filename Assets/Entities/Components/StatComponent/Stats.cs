@@ -15,6 +15,8 @@ public class Stats
     {
         statType = type;
         currentValue = initCurrentValue;
+        useMaxValue = initUseMaxValue;
+        maxValue = initMaxValue;
     }
 
     public void MaximizeCurrentStat()

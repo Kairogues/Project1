@@ -51,6 +51,7 @@ public class StatsComponent : MonoBehaviour
         buffDictionary.Add(currentBuffID, newBuff);
         
         nextBuffID++;
+
         return currentBuffID;
     }
 
