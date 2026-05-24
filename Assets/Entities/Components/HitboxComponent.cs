@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class HitboxComponent : MonoBehaviour
 {
+    [SerializeField] private EntityType entityType = EntityType.ENEMY;
     [SerializeField] private StatsComponent statsComponent;
     [SerializeField] private float timeAlive = 5.0f;
     private float damageAmount = 0.0f;
@@ -22,6 +23,11 @@ public class HitboxComponent : MonoBehaviour
 
     }
 
+    public EntityType GetEntityType()
+    {
+        return entityType;
+    }
+
     public void SetDamageAmount(float amount)
     {
         damageAmount = amount;
@@ -33,8 +39,12 @@ public class HitboxComponent : MonoBehaviour
         HurtboxComponent hurtbox = hitInfo.GetComponent<HurtboxComponent>();
 
         if (hurtbox != null)
-        {
-            hurtbox.TakeDamge(damageAmount);
+        {  
+            if ((entityType == EntityType.PLAYER && hurtbox.GetEntityType() == EntityType.ENEMY) ||
+            (entityType == EntityType.ENEMY && hurtbox.GetEntityType() == EntityType.PLAYER))
+            {
+                hurtbox.TakeDamge(damageAmount);
+            }
         }
 
         UnityEngine.Debug.Log(gameObject.name + " just hit " + hitInfo.name);
