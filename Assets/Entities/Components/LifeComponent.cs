@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class LifeComponent : MonoBehaviour
 {
-    public event Action OnDied;
+    public event Action Died;
 
     [SerializeField] private StatsComponent statsComponent;
     private Stats healthStat;
@@ -39,7 +39,7 @@ public class LifeComponent : MonoBehaviour
 
     private void Die()
     {
-        OnDied?.Invoke();
+        Died?.Invoke();
         print("You Died");
     }
 }
