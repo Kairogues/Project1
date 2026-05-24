@@ -4,7 +4,7 @@ using UnityEngine;
 [System.Serializable]
 public class Stats
 {
-    public event Action<float, float, float> OnStatChanged;
+    public event Action<float, float, float> StatChanged;
 
     [SerializeField] private StatType statType;
     [SerializeField] private float currentValue;
@@ -46,7 +46,7 @@ public class Stats
             currentValue = maxValue;
         }
 
-        OnStatChanged?.Invoke(oldValue, currentValue, maxValue);
+        StatChanged?.Invoke(oldValue, currentValue, maxValue);
     }
 
     public void UpdateMaxStat(float newMaxValue) 

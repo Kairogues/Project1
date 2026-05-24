@@ -81,22 +81,12 @@ public class StatsComponent : MonoBehaviour
     public void SubscribeToStat(StatType type, Action<float, float, float> listener)
     {
         Stats stat = GetStats(type);
-        stat.OnStatChanged += listener;
+        stat.StatChanged += listener;
     }
 
     public void UnSubscribeToStat(StatType type, Action<float, float, float> listener)
     {
         Stats stat = GetStats(type);
-        stat.OnStatChanged -= listener;
-    }
-
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
+        stat.StatChanged -= listener;
     }
 }
