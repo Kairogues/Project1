@@ -5,22 +5,11 @@ public class HitboxComponent : MonoBehaviour
 {
     [SerializeField] private EntityType entityType = EntityType.ENEMY;
     [SerializeField] private StatsComponent statsComponent;
-    [SerializeField] private float timeAlive = 5.0f;
     private float damageAmount = 0.0f;
 
     private void Awake()
     {
         SetDamageAmount(statsComponent.GetStats(StatType.ATTACK).GetCurrentValue());
-    }
-
-    private void Update()
-    {
-        timeAlive -= Time.deltaTime;
-
-        if (timeAlive <= 0.0f) {
-            SelfDestruct();
-        }
-
     }
 
     public EntityType GetEntityType()
