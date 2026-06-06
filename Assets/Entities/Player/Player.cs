@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     
     void Awake()
     {
+        PlayerManager.Instance.RegisterPlayer(this);
         moveAction = InputSystem.actions.FindAction("Move");
         movementComponent.SetBody(body);
     }
