@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public struct WeightedEnemy
 {
     public GameObject prefab;
-    public float spawnWeight;
+    public int spawnWeight;
     public float spawnChance;
 }
 

@@ -4,20 +4,15 @@ using System.Collections.Generic;
 public class AttackComponent : MonoBehaviour
 {
     [SerializeField] private List<Weapon> weapons;
-    private Queue<Weapon> attackQueue = new Queue<Weapon>();
 
     private void Awake()
     {
-        foreach (Weapon weapon in weapons)
-        {
-            weapon.SetAttackComponent(this);
-        }
+        
     }
     
     public void AddWeapon(Weapon newWeapon)
     {
         weapons.Add(newWeapon);
-        newWeapon.SetAttackComponent(this);
     }
 
     public void RemoveWeapon(Weapon newWeapon)
@@ -25,25 +20,14 @@ public class AttackComponent : MonoBehaviour
         weapons.Remove(newWeapon);
     }
 
-    public void RegisterAttack(Weapon weapon)
+    public void AutoAttackAll()
     {
-        attackQueue.Enqueue(weapon);
-    }
-
-    public void AutoAttack()
-    {
-        if (attackQueue.Count > 0)
+        foreach (Weapon weapon in weapons)
         {
-            Weapon currentWeapon = attackQueue.Dequeue();
-            if (weapons.Contains(currentWeapon))
+            if (weapon.CanAttack())
             {
-                currentWeapon.TryToAttack();
-            }   
+                weapon.Attack(transform.position, transform.rotation);
+            }
         }
-    }
-
-    private void Update()
-    {
-        AutoAttack();
     }
 }

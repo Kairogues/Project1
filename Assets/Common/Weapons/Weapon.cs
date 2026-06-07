@@ -1,41 +1,54 @@
 using UnityEngine;
 using System.Collections;
+using System.ComponentModel;
 
-public class Weapon : MonoBehaviour
+[System.Serializable]
+public class Weapon
 {
-    [SerializeField] protected WeaponData weaponData;
-    [SerializeField] protected bool canAttack = true;
-    [SerializeField] protected AttackComponent attackComponent;
+    [SerializeField] private WeaponData weaponData;
+    // [SerializeField] private bool canAttack = true;
+    private float nextCanAttackTime;
 
-    public virtual void SetAttackComponent(AttackComponent attackComponent)
-    {
-        this.attackComponent = attackComponent;
-    }
-
-    public virtual void ChangeWeapon(WeaponData newWeaponData)
+    public Weapon (WeaponData newWeaponData)
     {
         weaponData = newWeaponData;
+        nextCanAttackTime = Time.time;
     }
 
-    public IEnumerator CoolingDown()
+    public void ChangeWeapon(WeaponData newWeaponData)
     {
-        canAttack = false;
-        yield return new WaitForSeconds(weaponData.cooldown);
-        canAttack = true;
+        weaponData = newWeaponData;
+        nextCanAttackTime = Time.time;
     }
 
-    public virtual void TryToAttack()
+    //public IEnumerator CoolingDown()
+    //{
+    //    canAttack = false;
+    //    yield return new WaitForSeconds(weaponData.cooldown);
+    //    canAttack = true;
+    //}
+
+    public bool CanAttack()
     {
-        if (weaponData == null || canAttack == false)
+        if (Time.time <= nextCanAttackTime)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public void Attack(Vector3 initPosition, Quaternion initRotation)
+    {
+        if (weaponData == null)
         {
             return;
         }
 
-        Attack();
-    }
-
-    public virtual void Attack()
-    {
-        UnityEngine.Debug.Log("Trying to attack with the Base Weapon...");
+        // Quaternion spawnRotation = Quaternion.Euler(initRotation);
+        UnityEngine.Object.Instantiate(weaponData.projectile, initPosition + weaponData.offset, initRotation);
+        UnityEngine.Debug.Log("Attacking from " + weaponData.weaponName);
+        nextCanAttackTime = Time.time + weaponData.cooldown;
+        //StartCoroutine(CoolingDown());
     }
 }

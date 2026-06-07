@@ -6,6 +6,5 @@ public class WeaponData : ScriptableObject
     [SerializeField] public string weaponName;
     [SerializeField] public GameObject projectile;
     [SerializeField] public float cooldown;
-    [SerializeField] public float velocity;
     [SerializeField] public Vector3 offset;
 }

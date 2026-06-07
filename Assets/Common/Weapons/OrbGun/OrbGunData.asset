@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 06226edc7d7c00b40b10dfc93dbd8fa0, type: 3}
-  m_Name: OrbGun
+  m_Name: OrbGunData
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
-  weaponName: OrbGun
-  projectile: {fileID: 2302702833723626492, guid: 8f4217a296570c949831dc2e4dad668e, type: 3}
-  cooldown: 5
-  velocity: 10
+  weaponName: 
+  projectile: {fileID: 0}
+  cooldown: 0
   offset: {x: 0, y: 0, z: 0}

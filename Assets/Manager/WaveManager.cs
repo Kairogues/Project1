@@ -6,8 +6,8 @@ using System.Security;
 
 public class WaveManager : MonoBehaviour
 {
-    private const float MINIMUM_SPAWN_DISTANCE = 8.0F;
-    private const float MAXIMUM_SPAWN_DISTANCE = 15.0F;
+    private const float MINIMUM_SPAWN_DISTANCE = 15.0F;
+    private const float MAXIMUM_SPAWN_DISTANCE = 25.0F;
     public event Action<int> WaveStarted;
     public event Action<int> WaveEnded;
     public event Action<int> WaveCountdowned;
@@ -49,7 +49,10 @@ public class WaveManager : MonoBehaviour
 
     private void StartNewWave()
     {
-        currentWaveIndex += 1;
+        if ((currentWaveIndex + 1) != waveDatas.Count) {
+            currentWaveIndex += 1;
+        }
+
         currentWave = waveDatas[currentWaveIndex];
 
         currentSpawnCountdown = currentWave.spawnInterval;
@@ -79,8 +82,7 @@ public class WaveManager : MonoBehaviour
         Instantiate(monster.prefab, spawnPosition, Quaternion.identity);
         currentMonsterWeight += monster.spawnWeight;
         
-        UnityEngine.Debug.Log("SPAWNING... ");
-
+        UnityEngine.Debug.Log("SPAWNING... " + monster.prefab.name);
     }
 
     private WeightedEnemy PickMonster()

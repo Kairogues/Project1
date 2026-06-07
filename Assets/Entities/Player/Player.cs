@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D body;
     [SerializeField] private MovementComponent movementComponent;
+    [SerializeField] private AttackComponent attackComponent;
     [SerializeField] private InputActionReference moveInput;
 
     private InputActionAsset inputActions;
@@ -25,15 +26,20 @@ public class Player : MonoBehaviour
     
     void Awake()
     {
-        PlayerManager.Instance.RegisterPlayer(this);
+        
         moveAction = InputSystem.actions.FindAction("Move");
         movementComponent.SetBody(body);
+    }
+
+    private void Start()
+    {
+        PlayerManager.Instance.RegisterPlayer(this);
     }
 
     void Update()
     {
         // movementComponent.UpdateDirection(moveInput.action.ReadValue<Vector2>().normalized);
         movementComponent.UpdateDirection(moveAction.ReadValue<Vector2>().normalized);
-        
+        attackComponent.AutoAttackAll();
     }
 }
