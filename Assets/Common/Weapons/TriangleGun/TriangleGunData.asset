@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 06226edc7d7c00b40b10dfc93dbd8fa0, type: 3}
-  m_Name: SquareGun
+  m_Name: TriangleGunData
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
-  weaponName: 
-  projectile: {fileID: 0}
-  cooldown: 0
-  velocity: 0
+  weaponName: TriangleGun
+  projectile: {fileID: 2762286808985497872, guid: bff124a6076269f42903f8b047a558c4, type: 3}
+  cooldown: 5
   offset: {x: 0, y: 0, z: 0}

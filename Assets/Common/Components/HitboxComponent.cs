@@ -17,6 +17,11 @@ public class HitboxComponent : MonoBehaviour
         return entityType;
     }
 
+    public void SetEntityType(EntityType newEntityType)
+    {
+        entityType = newEntityType;
+    }
+
     public void SetDamageAmount(float amount)
     {
         damageAmount = amount;

@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class RedBoi : MonoBehaviour
 {
-    [SerializeField] private MovementComponent movementComponent;
     void Start()
     {
         
