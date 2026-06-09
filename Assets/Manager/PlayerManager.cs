@@ -1,8 +1,10 @@
+using System;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public event Action PlayerDied;
+
     public static PlayerManager Instance { get; private set; }
     public Player currentPlayer { get; private set; }
 
@@ -31,16 +33,14 @@ public class PlayerManager : MonoBehaviour
             Debug.LogWarning("A player is already registered! Overwriting reference.");
             currentPlayer = player;
         }
+
+        LifeComponent lifecomp = currentPlayer.GetLifeComponent();
+        lifecomp.Died += AnnouncePlayerDeath;
     }
 
-    void Start()
+    private void AnnouncePlayerDeath()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Debug.Log("Player died!");
+        PlayerDied?.Invoke();
     }
 }

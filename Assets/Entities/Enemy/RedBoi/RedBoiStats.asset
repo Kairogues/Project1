@@ -30,6 +30,6 @@ MonoBehaviour:
     useMaxValue: 0
     maxValue: 0
   - statType: 5
-    currentValue: 10
+    currentValue: 75
     useMaxValue: 0
     maxValue: 0

@@ -5,6 +5,12 @@ public class DropItemUponDeathComponent : MonoBehaviour
 {
     private const float DROP_DISTANCE = 1.0F;
     [SerializeField] private List<GameObject> itemsToDrop;
+    [SerializeField] private LifeComponent lifeComponent;
+
+    private void Start()
+    {
+        lifeComponent.Died += DropItems;
+    }
 
     private void DropItems()
     {

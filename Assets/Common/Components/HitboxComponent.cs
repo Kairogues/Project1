@@ -27,13 +27,12 @@ public class HitboxComponent : MonoBehaviour
         damageAmount = amount;
     }
 
-
     private void OnTriggerEnter2D(Collider2D hitInfo)
     {
         HurtboxComponent hurtbox = hitInfo.GetComponent<HurtboxComponent>();
 
         if (hurtbox != null)
-        {  
+        {
             if ((entityType == EntityType.PLAYER && hurtbox.GetEntityType() == EntityType.ENEMY) ||
             (entityType == EntityType.ENEMY && hurtbox.GetEntityType() == EntityType.PLAYER))
             {
