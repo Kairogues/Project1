@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MovementComponent
   body: {fileID: 198683641221690016}
+  statsComponent: {fileID: 7476460985856322022}
 --- !u!114 &7476460985856322022
 MonoBehaviour:
   m_ObjectHideFlags: 0

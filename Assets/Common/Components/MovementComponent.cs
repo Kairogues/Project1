@@ -1,5 +1,5 @@
+using System;
 using UnityEngine;
-using UnityEngine.Assemblies;
 
 public class MovementComponent : MonoBehaviour
 {
@@ -9,12 +9,11 @@ public class MovementComponent : MonoBehaviour
     private Vector2 currentDirection;
     private float currentSpeed = 0.0f;
 
-    private void Awake()
+    private void Start()
     {
         movementStat = statsComponent.GetStats(StatType.MOVEMENT_SPEED);
+        currentSpeed = movementStat.GetCurrentValue();
         SubscribeToMovementSpeedChanged(UpdateSpeedAfterChanged);
-
-        UnityEngine.Debug.Log(gameObject.name + " has " + healthStat.GetCurrentValue() + " health");
     }
 
     private void FixedUpdate()

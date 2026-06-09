@@ -31,8 +31,11 @@ public class AttackComponent : MonoBehaviour
         }
     }
 
-    public void Attack(Weapon weapon)
+    public void AttackSingleWeapon()
     {
-        
+        if (weapons[0].CanAttack())
+        {
+            weapons[0].Attack(transform.position, transform.rotation);
+        }
     }
 }

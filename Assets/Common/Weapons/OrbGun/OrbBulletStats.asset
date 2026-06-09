@@ -17,3 +17,7 @@ MonoBehaviour:
     currentValue: 10
     useMaxValue: 0
     maxValue: 0
+  - statType: 5
+    currentValue: 350
+    useMaxValue: 0
+    maxValue: 350

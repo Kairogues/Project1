@@ -24,16 +24,16 @@ MonoBehaviour:
   - statType: 2
     currentValue: 100
     useMaxValue: 0
-    maxValue: 0
+    maxValue: 100
   - statType: 3
     currentValue: 2
     useMaxValue: 0
-    maxValue: 0
+    maxValue: 2
   - statType: 4
     currentValue: 0
     useMaxValue: 0
     maxValue: 0
   - statType: 5
-    currentValue: 75
+    currentValue: 100
     useMaxValue: 0
-    maxValue: 0
+    maxValue: 100

@@ -20,7 +20,7 @@ MonoBehaviour:
   - statType: 2
     currentValue: 10
     useMaxValue: 0
-    maxValue: 0
+    maxValue: 10
   - statType: 4
     currentValue: 0
     useMaxValue: 0
@@ -32,4 +32,4 @@ MonoBehaviour:
   - statType: 5
     currentValue: 75
     useMaxValue: 0
-    maxValue: 0
+    maxValue: 75
