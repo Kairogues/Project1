@@ -30,4 +30,9 @@ public class AttackComponent : MonoBehaviour
             }
         }
     }
+
+    public void Attack(Weapon weapon)
+    {
+        
+    }
 }

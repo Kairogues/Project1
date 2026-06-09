@@ -8,7 +8,7 @@ public class LifeComponent : MonoBehaviour
     [SerializeField] private StatsComponent statsComponent;
     private Stats healthStat;
 
-    void Awake()
+    private void Awake()
     {
         healthStat = statsComponent.GetStats(StatType.HEALTH);
         healthStat.MaximizeCurrentStat();
