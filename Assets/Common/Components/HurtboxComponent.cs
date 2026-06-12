@@ -5,13 +5,7 @@ public class HurtboxComponent : MonoBehaviour
 {
     public event Action<float> TookDamage;
 
-    [SerializeField] private EntityType entityType = EntityType.ENEMY;
     [SerializeField] private LifeComponent lifeComponent;
-
-    public EntityType GetEntityType()
-    {
-        return entityType;
-    }
 
     public void TakeDamge(float damage)
     {
@@ -20,8 +14,14 @@ public class HurtboxComponent : MonoBehaviour
         TookDamage?.Invoke(damage);
     }
     
-    // public void ApplyDebuff()
-    // {
-    //     
-    // }
+    private void OnTriggerEnter2D(Collider2D hitInfo)
+    {
+        HitboxComponent hitbox = hitInfo.GetComponent<HitboxComponent>();
+
+        if (hitbox != null)
+        {
+            hitbox.RegisterHurtboxHit(this);
+            TakeDamge(hitbox.GetDamageAmount());
+        }
+    }
 }
