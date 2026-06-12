@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -43,7 +42,9 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        movementComponent.UpdateDirection(moveAction.ReadValue<Vector2>().normalized);
+        Vector2 moveDirection = moveAction.ReadValue<Vector2>().normalized;
+        movementComponent.UpdateDirection(moveDirection);
+        attackComponent.UpdateFacingDirection(moveDirection);
         attackComponent.AutoAttackAll();
     }
 }

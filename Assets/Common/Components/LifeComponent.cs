@@ -49,6 +49,7 @@ public class LifeComponent : MonoBehaviour
     private void Die()
     {
         Died?.Invoke();
+
         print("You Died");
     }
 }

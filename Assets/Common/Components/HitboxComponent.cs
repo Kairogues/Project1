@@ -1,8 +1,10 @@
 using System.Data;
+using System;
 using UnityEngine;
 
 public class HitboxComponent : MonoBehaviour
 {
+    //public event Action<HurtboxComponent> HitHurtbox;
     [SerializeField] private EntityType entityType = EntityType.ENEMY;
     [SerializeField] private StatsComponent statsComponent;
     private float damageAmount = 0.0f;
@@ -33,16 +35,23 @@ public class HitboxComponent : MonoBehaviour
 
         if (hurtbox != null)
         {
-            if ((entityType == EntityType.PLAYER && hurtbox.GetEntityType() == EntityType.ENEMY) ||
-            (entityType == EntityType.ENEMY && hurtbox.GetEntityType() == EntityType.PLAYER))
-            {
-                hurtbox.TakeDamge(damageAmount);
-            }
+            hurtbox.TakeDamge(damageAmount);
+            
+            //if ((entityType == EntityType.PLAYER && hurtbox.GetEntityType() == EntityType.ENEMY) ||
+            //(entityType == EntityType.ENEMY && hurtbox.GetEntityType() == EntityType.PLAYER))
+            //{
+                
+            //}
         }
 
         UnityEngine.Debug.Log(gameObject.name + " just hit " + hitInfo.name);
-
         SelfDestruct();
+        //int obstacleLayer = LayerMask.NameToLayer("Obstacle");
+        
+        //if (gameObject.layer == obstacleLayer)
+        //{
+        //    SelfDestruct();
+        //}
     }
 
     private void SelfDestruct()

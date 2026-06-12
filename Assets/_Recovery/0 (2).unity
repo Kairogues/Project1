@@ -304,7 +304,7 @@ GameObject:
   - component: {fileID: 87518062}
   - component: {fileID: 87518061}
   - component: {fileID: 87518063}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1351,7 +1351,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 676807903}
-  - component: {fileID: 676807907}
   - component: {fileID: 676807902}
   - component: {fileID: 676807901}
   - component: {fileID: 676807900}
@@ -1566,8 +1565,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11bc556a81620d342a1ad1dbf14b8d79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropItemUponDeathComponent
-  itemsToDrop:
-  - {fileID: 753890396}
+  itemsToDrop: []
   lifeComponent: {fileID: 676807901}
 --- !u!114 &676807906
 MonoBehaviour:
@@ -1582,20 +1580,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HurtboxComponent
   entityType: 1
-  lifeComponent: {fileID: 676807901}
---- !u!114 &676807907
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 676807897}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed0093ee24795dc40a7ab71015b96f5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RedBoi
-  movementComponent: {fileID: 676807902}
   lifeComponent: {fileID: 676807901}
 --- !u!1 &753890396
 GameObject:

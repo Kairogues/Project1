@@ -4,6 +4,21 @@ using System.Collections.Generic;
 public class AttackComponent : MonoBehaviour
 {
     [SerializeField] private List<Weapon> weapons;
+    private Vector2 facingDirection;
+
+    public void UpdateFacingDirection(Vector2 newFacingDirection)
+    {
+        if (newFacingDirection == Vector2.zero)
+        {
+            return;
+        }
+        facingDirection = newFacingDirection;
+    }
+
+    public Vector2 GetFacingDirection()
+    {
+        return facingDirection;
+    }
 
     private void Awake()
     {
@@ -20,13 +35,22 @@ public class AttackComponent : MonoBehaviour
         weapons.Remove(newWeapon);
     }
 
+    private Quaternion RotationFromDirection()
+    {
+        float angle = Mathf.Atan2(facingDirection.y, facingDirection.x) * Mathf.Rad2Deg;
+
+        Quaternion projectileRotation = Quaternion.Euler(0f, 0f, angle); 
+
+        return projectileRotation;
+    }
+
     public void AutoAttackAll()
     {
         foreach (Weapon weapon in weapons)
         {
             if (weapon.CanAttack())
             {
-                weapon.Attack(transform.position, transform.rotation);
+                weapon.Attack(transform.position, RotationFromDirection());
             }
         }
     }
@@ -35,7 +59,7 @@ public class AttackComponent : MonoBehaviour
     {
         if (weapons[0].CanAttack())
         {
-            weapons[0].Attack(transform.position, transform.rotation);
+            weapons[0].Attack(transform.position, RotationFromDirection());
         }
     }
 }
