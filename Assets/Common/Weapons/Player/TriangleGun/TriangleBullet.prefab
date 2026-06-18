@@ -10,13 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1321161156806947429}
   - component: {fileID: 7694996952040895571}
-  - component: {fileID: 626909812466552912}
   - component: {fileID: 1802650066276438896}
   - component: {fileID: 2830156689721818155}
   - component: {fileID: 1029704746232204264}
   - component: {fileID: 4937166858316089990}
-  - component: {fileID: 4813732526376855292}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: TriangleBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,7 +33,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3839071747048208036}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7694996952040895571
@@ -50,22 +49,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79a0e3a5fe8709c4dbfc2fdecd951796, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TriangleBullet
+  hitboxComponent: {fileID: 998347107554686814}
   body: {fileID: 4937166858316089990}
   movementComponent: {fileID: 1802650066276438896}
---- !u!114 &626909812466552912
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2762286808985497872}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca294fdf04a39594a8d0213d923fac9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HitboxComponent
-  entityType: 0
-  statsComponent: {fileID: 2830156689721818155}
 --- !u!114 &1802650066276438896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,13 +165,59 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &4813732526376855292
+--- !u!1 &4991643969504600428
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3839071747048208036}
+  - component: {fileID: 998347107554686814}
+  - component: {fileID: 259500606257252566}
+  m_Layer: 6
+  m_Name: Hitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3839071747048208036
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4991643969504600428}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1321161156806947429}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &998347107554686814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4991643969504600428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca294fdf04a39594a8d0213d923fac9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HitboxComponent
+  statsComponent: {fileID: 2830156689721818155}
+--- !u!61 &259500606257252566
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2762286808985497872}
+  m_GameObject: {fileID: 4991643969504600428}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -213,15 +245,15 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.21133333}
+  m_Offset: {x: 0, y: 0.14120677}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.28866667}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 0.8513312}
   m_EdgeRadius: 0

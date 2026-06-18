@@ -299,12 +299,11 @@ GameObject:
   - component: {fileID: 87518066}
   - component: {fileID: 87518067}
   - component: {fileID: 87518065}
-  - component: {fileID: 87518068}
   - component: {fileID: 87518059}
   - component: {fileID: 87518062}
   - component: {fileID: 87518061}
   - component: {fileID: 87518063}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -384,6 +383,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 519420032}
+  - {fileID: 1671249014}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &87518061
@@ -546,20 +546,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MovementComponent
   body: {fileID: 87518061}
   statsComponent: {fileID: 87518065}
---- !u!114 &87518068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 87518058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09b77688b53f01e449c22c41f53fdf6a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HurtboxComponent
-  entityType: 0
-  lifeComponent: {fileID: 87518066}
 --- !u!114 &87518069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1360,7 +1346,7 @@ GameObject:
   - component: {fileID: 676807899}
   - component: {fileID: 676807898}
   - component: {fileID: 676807904}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RedBoi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1581,7 +1567,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09b77688b53f01e449c22c41f53fdf6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HurtboxComponent
-  entityType: 1
   lifeComponent: {fileID: 676807901}
 --- !u!114 &676807907
 MonoBehaviour:
@@ -1611,7 +1596,7 @@ GameObject:
   - component: {fileID: 753890400}
   - component: {fileID: 753890399}
   - component: {fileID: 753890398}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rock (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1777,7 +1762,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca294fdf04a39594a8d0213d923fac9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HitboxComponent
-  entityType: 0
   statsComponent: {fileID: 753890402}
 --- !u!114 &753890402
 MonoBehaviour:
@@ -2117,6 +2101,98 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1671249013
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1671249014}
+  - component: {fileID: 1671249015}
+  - component: {fileID: 1671249016}
+  m_Layer: 7
+  m_Name: HurtboxComponent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1671249014
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1671249013}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 87518060}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1671249015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1671249013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09b77688b53f01e449c22c41f53fdf6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HurtboxComponent
+  lifeComponent: {fileID: 87518066}
+--- !u!61 &1671249016
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1671249013}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &1831071934
 GameObject:
   m_ObjectHideFlags: 0

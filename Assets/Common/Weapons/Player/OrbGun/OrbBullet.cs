@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class OrbBullet : MonoBehaviour
 {
+    [SerializeField] private HitboxComponent hitboxComponent;
     [SerializeField] private Rigidbody2D body;
     [SerializeField] private MovementComponent movementComponent;
     private float timeAlive = 3.0f;
@@ -13,6 +14,11 @@ public class OrbBullet : MonoBehaviour
         movementComponent.UpdateDirection(transform.right);
     }
 
+    private void Start()
+    {
+        hitboxComponent.HitHurtbox += ProcessHitHurtbox;
+    }
+
     private void Update()
     {
         timeAlive -= Time.deltaTime;
@@ -20,6 +26,11 @@ public class OrbBullet : MonoBehaviour
         {
             SelfDestruct();
         }
+    }
+
+    private void ProcessHitHurtbox(HurtboxComponent hurtboxComponent)
+    {
+        SelfDestruct();
     }
 
     private void SelfDestruct()
