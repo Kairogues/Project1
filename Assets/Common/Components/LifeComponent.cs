@@ -5,12 +5,12 @@ public class LifeComponent : MonoBehaviour
 {
     public event Action Died;
 
-    [SerializeField] private StatsComponent statsComponent;
-    private Stats healthStat;
+    [SerializeField] private StatComponent statComponent;
+    private Stat healthStat;
 
     private void Start()
     {
-        healthStat = statsComponent.GetStats(StatType.HEALTH);
+        healthStat = statComponent.GetStat(StatType.HEALTH);
         healthStat.MaximizeCurrentStat();
 
         UnityEngine.Debug.Log(gameObject.name + " has " + healthStat.GetCurrentValue() + " health");
@@ -43,7 +43,7 @@ public class LifeComponent : MonoBehaviour
 
     private void SubscribeToHealthChanged(Action<float, float, float> listener) 
     {
-        statsComponent.SubscribeToStat(StatType.HEALTH, listener);
+        statComponent.SubscribeToStat(StatType.HEALTH, listener);
     }
 
     private void Die()

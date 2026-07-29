@@ -8,6 +8,8 @@ public class TriangleBullet : MonoBehaviour
     [SerializeField] private MovementComponent movementComponent;
     private float timeFly = 0.2f;
     private float spinTime = 3.0f;
+    private bool isSpinning = false;
+    
 
     private void Awake()
     {
@@ -32,6 +34,11 @@ public class TriangleBullet : MonoBehaviour
                 SelfDestruct();
             }
         }
+
+        if (isSpinning)
+        {
+            
+        }
     }
 
     private void ProcessHitHurtbox(HurtboxComponent hurtboxComponent)
@@ -43,6 +50,7 @@ public class TriangleBullet : MonoBehaviour
     private void SpinInPlace()
     {
         movementComponent.UpdateDirection(Vector2.zero);
+        isSpinning = true;
     }
 
     private void SelfDestruct()

@@ -3,16 +3,16 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Data;
 
-public class StatsComponent : MonoBehaviour
+public class StatComponent : MonoBehaviour
 {
-    [SerializeField] private StatsSet statsSet;
+    [SerializeField] private StatSet statSet;
 
     [SerializeField] private Dictionary<int, Buff> buffDictionary = new Dictionary<int, Buff>();
     private int nextBuffID = 0;
     
     public void RecalculateStatAfterBuff(StatType type)
     {
-        Stats stat = statsSet.GetStatsInCurrentList(type);
+        Stat stat = statSet.GetStatInCurrentList(type);
         if (stat == null)
         {
             UnityEngine.Debug.LogWarning("Trying to recalculate non-existing stat!");
@@ -36,10 +36,10 @@ public class StatsComponent : MonoBehaviour
             }
         }
 
-        float currentStatValue = statsSet.GetStatsInCurrentList(type).GetCurrentValue();
+        float currentStatValue = statSet.GetStatInCurrentList(type).GetCurrentValue();
         currentStatValue += addAmount;
         currentStatValue *= 1.0f + multiplyAmount;
-        statsSet.GetStatsInCurrentList(type).UpdateStat(currentStatValue);
+        statSet.GetStatInCurrentList(type).UpdateStat(currentStatValue);
     }
 
     // Temporary, work just fine but I really do not like this
@@ -67,9 +67,9 @@ public class StatsComponent : MonoBehaviour
         return false;
     }
 
-    public Stats GetStats(StatType type)
+    public Stat GetStat(StatType type)
     {
-        Stats stat = statsSet.GetStatsInCurrentList(type);
+        Stat stat = statSet.GetStatInCurrentList(type);
         if (stat == null)
         {
             UnityEngine.Debug.LogWarning("Trying to access non-existing stat!");
@@ -81,13 +81,13 @@ public class StatsComponent : MonoBehaviour
 
     public void SubscribeToStat(StatType type, Action<float, float, float> listener)
     {
-        Stats stat = GetStats(type);
+        Stat stat = GetStat(type);
         stat.StatChanged += listener;
     }
 
     public void UnSubscribeToStat(StatType type, Action<float, float, float> listener)
     {
-        Stats stat = GetStats(type);
+        Stat stat = GetStat(type);
         stat.StatChanged -= listener;
     }
 }

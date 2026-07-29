@@ -4,14 +4,14 @@ using UnityEngine;
 public class MovementComponent : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D body;
-    [SerializeField] private StatsComponent statsComponent;
-    private Stats movementStat;
+    [SerializeField] private StatComponent statComponent;
+    private Stat movementStat;
     private Vector2 currentDirection;
     private float currentSpeed = 0.0f;
 
     private void Start()
     {
-        movementStat = statsComponent.GetStats(StatType.MOVEMENT_SPEED);
+        movementStat = statComponent.GetStat(StatType.MOVEMENT_SPEED);
         currentSpeed = movementStat.GetCurrentValue();
         SubscribeToMovementSpeedChanged(UpdateSpeedAfterChanged);
     }
@@ -38,7 +38,7 @@ public class MovementComponent : MonoBehaviour
 
     private void SubscribeToMovementSpeedChanged(Action<float, float, float> listener) 
     {
-        statsComponent.SubscribeToStat(StatType.MOVEMENT_SPEED, listener);
+        statComponent.SubscribeToStat(StatType.MOVEMENT_SPEED, listener);
     }
 
     public void UpdateDirection(Vector2 newDirection)

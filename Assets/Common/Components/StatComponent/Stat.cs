@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [System.Serializable]
-public class Stats
+public class Stat
 {
     public event Action<float, float, float> StatChanged;
 
@@ -11,7 +11,7 @@ public class Stats
     [SerializeField] private bool useMaxValue;
     [SerializeField] private float maxValue;
 
-    public Stats(StatType type = StatType.HEALTH, float initCurrentValue = 0, bool initUseMaxValue = false, float initMaxValue = 0)
+    public Stat(StatType type = StatType.HEALTH, float initCurrentValue = 0, bool initUseMaxValue = false, float initMaxValue = 0)
     {
         statType = type;
         currentValue = initCurrentValue;

@@ -6,11 +6,11 @@ public class HitboxComponent : MonoBehaviour
 {
     public event Action<HurtboxComponent> HitHurtbox;
 
-    [SerializeField] private StatsComponent statsComponent;
+    [SerializeField] private StatComponent statComponent;
 
     public float GetDamageAmount()
     {
-        return statsComponent.GetStats(StatType.ATTACK).GetCurrentValue();
+        return statComponent.GetStat(StatType.ATTACK).GetCurrentValue();
     }
 
     public void RegisterHurtboxHit(HurtboxComponent hurtbox)
