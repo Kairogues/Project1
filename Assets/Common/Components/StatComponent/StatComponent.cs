@@ -62,7 +62,7 @@ public class StatComponent : MonoBehaviour
     {
         if (buffDictionary.ContainsKey(buffIDToRemove))
         {
-            StatBuffType buffType = buffDictionary[buffIDToRemove];
+            StatType buffType = buffDictionary[buffIDToRemove].GetStatType();
             buffDictionary.Remove(buffIDToRemove);
             RecalculateStatAfterBuff(buffType);
             return true;
