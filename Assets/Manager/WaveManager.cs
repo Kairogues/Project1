@@ -4,6 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security;
 
+/// <summary>
+///  WaveManager is used to track the progression of the level
+/// </summary>
 public class WaveManager : MonoBehaviour
 {
     private const float MINIMUM_SPAWN_DISTANCE = 15.0F;

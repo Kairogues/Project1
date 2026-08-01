@@ -2,12 +2,16 @@ using System;
 using System.Numerics;
 using UnityEngine;
 
+/// <summary>
+///  PlayerManager is used to track everything about the player such as the player's alive state, position,...
+/// </summary>
 public class PlayerManager : MonoBehaviour
 {
     public event Action PlayerDied;
 
     public static PlayerManager Instance { get; private set; }
     public Player currentPlayer { get; private set; }
+    public LifeComponent currentPlayerLifeComponent { get; private set; }
 
     private void Awake()
     {
@@ -22,7 +26,7 @@ public class PlayerManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void RegisterPlayer(Player player)
+    public void RegisterPlayer(Player player, LifeComponent playerLifeComponent)
     {
         if (currentPlayer == null)
         {
@@ -35,8 +39,8 @@ public class PlayerManager : MonoBehaviour
             currentPlayer = player;
         }
 
-        LifeComponent lifecomp = currentPlayer.GetLifeComponent();
-        lifecomp.Died += AnnouncePlayerDeath;
+        currentPlayerLifeComponent = playerLifeComponent;
+        currentPlayerLifeComponent.Died += AnnouncePlayerDeath;
     }
 
     private void AnnouncePlayerDeath()

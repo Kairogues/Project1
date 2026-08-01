@@ -2,6 +2,9 @@ using UnityEngine;
 using System;
 using System.Collections;
 
+/// <summary>
+///  GameManager is used to track every other managers, it controls the current level and state of the game
+/// </summary>
 public class GameManager : MonoBehaviour
 {
     

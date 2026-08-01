@@ -6,7 +6,11 @@ using System.Collections.Generic;
 public struct WeightedEnemy
 {
     public GameObject prefab;
+
+    // The "space" this enemy takes up
     public int spawnWeight;
+
+    // The chance this enemy got spawned during a spawn attempt
     public float spawnChance;
 }
 
