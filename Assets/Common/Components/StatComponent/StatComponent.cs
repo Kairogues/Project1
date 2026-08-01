@@ -7,7 +7,7 @@ public class StatComponent : MonoBehaviour
 {
     [SerializeField] private StatSet statSet;
 
-    [SerializeField] private Dictionary<int, Buff> buffDictionary = new Dictionary<int, Buff>();
+    [SerializeField] private Dictionary<int, StatBuff> buffDictionary = new Dictionary<int, StatBuff>();
     private int nextBuffID = 0;
     
     public void RecalculateStatAfterBuff(StatType type)
@@ -22,14 +22,14 @@ public class StatComponent : MonoBehaviour
         float addAmount = 0.0f;
         float multiplyAmount = 0.0f;
 
-        foreach (Buff buff in buffDictionary.Values)
+        foreach (StatBuff buff in buffDictionary.Values)
         {
             if (buff.GetStatType() == type)
             {
-                if (buff.GetBuffType() == BuffType.ADD)
+                if (buff.GetBuffType() == StatBuffType.ADD)
                 {
                     addAmount += buff.GetBuffAmount();
-                } else if (buff.GetBuffType() == BuffType.MULTIPLY)
+                } else if (buff.GetBuffType() == StatBuffType.MULTIPLY)
                 {
                     multiplyAmount += buff.GetBuffAmount();
                 }
@@ -43,12 +43,14 @@ public class StatComponent : MonoBehaviour
     }
 
     // Temporary, work just fine but I really do not like this
-    public int AddBuff(Buff newBuff)
+    public int AddBuff(StatBuff newBuff)
     {
         int currentBuffID = nextBuffID;
         newBuff.SetBuffID(currentBuffID);
         
         buffDictionary.Add(currentBuffID, newBuff);
+
+        RecalculateStatAfterBuff(newBuff.GetStatType());
         
         nextBuffID++;
 
@@ -60,7 +62,9 @@ public class StatComponent : MonoBehaviour
     {
         if (buffDictionary.ContainsKey(buffIDToRemove))
         {
+            StatBuffType buffType = buffDictionary[buffIDToRemove];
             buffDictionary.Remove(buffIDToRemove);
+            RecalculateStatAfterBuff(buffType);
             return true;
         }
 

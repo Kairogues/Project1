@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public enum BuffType
+public enum StatBuffType
 {
     ADD,
     MULTIPLY
 }
 
-public class Buff
+public class StatBuff
 {
-    [SerializeField] private BuffType buffType;
+    [SerializeField] private StatBuffType buffType;
     [SerializeField] private StatType statType;
     [SerializeField] private float buffAmount;
     [SerializeField] private int buffID;
@@ -28,7 +28,7 @@ public class Buff
         return statType;
     }
 
-    public BuffType GetBuffType()
+    public StatBuffType GetBuffType()
     {
         return buffType;
     }
