@@ -14,6 +14,7 @@ public class HurtboxComponent : MonoBehaviour
         TookDamage?.Invoke(damage);
     }
     
+    /*
     private void OnTriggerEnter2D(Collider2D hitInfo)
     {
         HitboxComponent hitbox = hitInfo.GetComponent<HitboxComponent>();
@@ -24,4 +25,5 @@ public class HurtboxComponent : MonoBehaviour
             TakeDamge(hitbox.GetDamageAmount());
         }
     }
+    */
 }

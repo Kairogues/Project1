@@ -303,7 +303,7 @@ GameObject:
   - component: {fileID: 87518062}
   - component: {fileID: 87518061}
   - component: {fileID: 87518063}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -518,7 +518,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4db3b6c65edb3ad47bb623e55fdba4a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StatsComponent
-  statsSet: {fileID: 11400000, guid: f31c271097e5f9d4582c25186c382d78, type: 2}
+  statSet: {fileID: 11400000, guid: f31c271097e5f9d4582c25186c382d78, type: 2}
 --- !u!114 &87518066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -531,7 +531,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0c770f6b7813bd48b7b0b8e2603aa12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LifeComponent
-  statsComponent: {fileID: 87518065}
+  statComponent: {fileID: 87518065}
 --- !u!114 &87518067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -545,7 +545,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MovementComponent
   body: {fileID: 87518061}
-  statsComponent: {fileID: 87518065}
+  statComponent: {fileID: 87518065}
 --- !u!114 &87518069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1451,7 +1451,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4db3b6c65edb3ad47bb623e55fdba4a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StatsComponent
-  statsSet: {fileID: 11400000, guid: 1ec1df3b678818a42bf89a0d15482a6d, type: 2}
+  statSet: {fileID: 11400000, guid: 1ec1df3b678818a42bf89a0d15482a6d, type: 2}
 --- !u!114 &676807901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1464,7 +1464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0c770f6b7813bd48b7b0b8e2603aa12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LifeComponent
-  statsComponent: {fileID: 676807900}
+  statComponent: {fileID: 676807900}
 --- !u!114 &676807902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1478,7 +1478,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MovementComponent
   body: {fileID: 676807898}
-  statsComponent: {fileID: 676807900}
+  statComponent: {fileID: 676807900}
 --- !u!4 &676807903
 Transform:
   m_ObjectHideFlags: 0
@@ -1762,7 +1762,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca294fdf04a39594a8d0213d923fac9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HitboxComponent
-  statsComponent: {fileID: 753890402}
+  statComponent: {fileID: 753890402}
 --- !u!114 &753890402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1775,7 +1775,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4db3b6c65edb3ad47bb623e55fdba4a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StatsComponent
-  statsSet: {fileID: 11400000, guid: 8dc42dd246a0251488092c2f0fd41ef2, type: 2}
+  statSet: {fileID: 11400000, guid: 8dc42dd246a0251488092c2f0fd41ef2, type: 2}
 --- !u!1 &974866654
 GameObject:
   m_ObjectHideFlags: 0

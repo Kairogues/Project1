@@ -4,6 +4,7 @@ using UnityEngine;
 [System.Serializable]
 public class Stat
 {
+    // oldValue, currentValue, maxValue
     public event Action<float, float, float> StatChanged;
 
     [SerializeField] private StatType statType;

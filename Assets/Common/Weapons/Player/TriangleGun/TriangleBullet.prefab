@@ -65,7 +65,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MovementComponent
   body: {fileID: 4937166858316089990}
-  statsComponent: {fileID: 2830156689721818155}
+  statComponent: {fileID: 2830156689721818155}
 --- !u!114 &2830156689721818155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4db3b6c65edb3ad47bb623e55fdba4a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StatsComponent
-  statsSet: {fileID: 11400000, guid: b9c76e7ecbff6ca4fa7c39a0e69f02e8, type: 2}
+  statSet: {fileID: 11400000, guid: b9c76e7ecbff6ca4fa7c39a0e69f02e8, type: 2}
 --- !u!212 &1029704746232204264
 SpriteRenderer:
   serializedVersion: 2
@@ -210,7 +210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca294fdf04a39594a8d0213d923fac9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HitboxComponent
-  statsComponent: {fileID: 2830156689721818155}
+  statComponent: {fileID: 2830156689721818155}
 --- !u!61 &259500606257252566
 BoxCollider2D:
   m_ObjectHideFlags: 0
