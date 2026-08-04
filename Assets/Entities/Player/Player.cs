@@ -13,11 +13,6 @@ public class Player : MonoBehaviour
     private InputActionAsset inputActions;
     private InputAction moveAction;
 
-    public LifeComponent GetLifeComponent()
-    {
-        return lifeComponent;
-    }
-
     void OnEnalble()
     {
         inputActions.FindActionMap("Player").Enable();
@@ -30,14 +25,13 @@ public class Player : MonoBehaviour
     
     void Awake()
     {
-        
         moveAction = InputSystem.actions.FindAction("Move");
         movementComponent.SetBody(body);
     }
 
     private void Start()
     {
-        PlayerManager.Instance.RegisterPlayer(this);
+        GameManager.Instance.playerManager.RegisterPlayer(this, lifeComponent);
     }
 
     void Update()

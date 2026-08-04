@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1bfce8425a8b7941bd4bfd5738dfa92, type: 3}
   m_Name: PlayerStatSet
   m_EditorClassIdentifier: Assembly-CSharp::StatsSet
-  statsList:
+  statList:
   - statType: 0
     currentValue: 100
     useMaxValue: 1
@@ -24,11 +24,11 @@ MonoBehaviour:
   - statType: 2
     currentValue: 100
     useMaxValue: 0
-    maxValue: 100
+    maxValue: 0
   - statType: 3
     currentValue: 2
     useMaxValue: 0
-    maxValue: 2
+    maxValue: 0
   - statType: 4
     currentValue: 0
     useMaxValue: 0
@@ -36,4 +36,4 @@ MonoBehaviour:
   - statType: 5
     currentValue: 100
     useMaxValue: 0
-    maxValue: 100
+    maxValue: 0

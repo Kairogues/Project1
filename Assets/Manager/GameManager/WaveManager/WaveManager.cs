@@ -112,7 +112,7 @@ public class WaveManager : MonoBehaviour
         float randomAngle = UnityEngine.Random.Range(0.0f, 360.0f) * Mathf.Deg2Rad;
 
         Vector3 spawnDirection = new Vector3(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle), 0);
-        Vector3 spawnPosition = PlayerManager.Instance.currentPlayer.transform.position + (spawnDirection * randomDistance);
+        Vector3 spawnPosition = GameManager.Instance.playerManager.transform.position + (spawnDirection * randomDistance);
 
         return spawnPosition;
     }

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 221b3d28b2142d844b1f75042305e42d, type: 3}
+  m_Name: XPGrowthConfig
+  m_EditorClassIdentifier: Assembly-CSharp::XPGrowthConfig
+  baseXP: 5
+  tiers:
+  - upperThreshold: 20
+    xpIncreasePerLevel: 5
+  - upperThreshold: 30
+    xpIncreasePerLevel: 8
+  - upperThreshold: 40
+    xpIncreasePerLevel: 10
+  - upperThreshold: 50
+    xpIncreasePerLevel: 13

@@ -9,22 +9,8 @@ public class PlayerManager : MonoBehaviour
 {
     public event Action PlayerDied;
 
-    public static PlayerManager Instance { get; private set; }
     public Player currentPlayer { get; private set; }
     public LifeComponent currentPlayerLifeComponent { get; private set; }
-
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-        
-        DontDestroyOnLoad(gameObject);
-    }
 
     public void RegisterPlayer(Player player, LifeComponent playerLifeComponent)
     {
@@ -45,7 +31,6 @@ public class PlayerManager : MonoBehaviour
 
     private void AnnouncePlayerDeath()
     {
-        Debug.Log("Player died!");
         PlayerDied?.Invoke();
     }
 }
