@@ -23,10 +23,20 @@ public class GameManager : MonoBehaviour
         Instance = this;
         
         DontDestroyOnLoad(gameObject);
+
+        playerManager = gameObject.GetComponentInChildren<PlayerManager>();
+        waveManager = gameObject.GetComponentInChildren<WaveManager>();
     }
 
-    private void OnEnable() => playerManager.PlayerDied += OnPlayerDeath;
-    private void OnDisable() => playerManager.PlayerDied -= OnPlayerDeath;
+    private void OnEnable()
+    {
+        playerManager.PlayerDied += OnPlayerDeath;
+    }
+
+    private void OnDisable()
+    {
+        playerManager.PlayerDied -= OnPlayerDeath;
+    }
     
     void Start()
     {

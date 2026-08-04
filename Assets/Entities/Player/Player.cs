@@ -8,20 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] private MovementComponent movementComponent;
     [SerializeField] private AttackComponent attackComponent;
     [SerializeField] private LifeComponent lifeComponent;
-    [SerializeField] private InputActionReference moveInput;
-
-    private InputActionAsset inputActions;
     private InputAction moveAction;
-
-    void OnEnalble()
-    {
-        inputActions.FindActionMap("Player").Enable();
-    }
-
-    // void OnDisable()
-    // {
-    //     inputActions.FindActionMap("Player").Disable();
-    // }
     
     void Awake()
     {
