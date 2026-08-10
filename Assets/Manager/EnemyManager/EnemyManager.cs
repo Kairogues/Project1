@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Pool;
 using System.Collections.Generic;
 
 /// <summary>
@@ -7,17 +8,69 @@ using System.Collections.Generic;
 public class EnemyManager : MonoBehaviour
 {
     private const int MAX_MONSTER_WEIGHT = 300;
+    private const int DEFAULT_POOL_SIZE = 50;
     private const float MINIMUM_SPAWN_DISTANCE = 15.0F;
     private const float MAXIMUM_SPAWN_DISTANCE = 25.0F;
     [SerializeField] private List<WeightedEnemy> currentEnemyPool;
+    [SerializeField] private Dictionary<string, IObjectPool<GameObject>> currentEnemyPoolObjectPool;
     [SerializeField] private List<Enemy> currentEnemyList;
     private int currentMonsterWeight = 0;
+
+
+
+    private GameObject temporaryCurrentEnemyGameObjectUsedForSettingUpObjectPool;
 
     public void SetNewEnemyPool(List<WeightedEnemy> newEnemyPool)
     {
         currentEnemyPool = newEnemyPool;
         Debug.Log("SET NEW ENEMY POOL");
+
+        foreach (WeightedEnemy enemy in currentEnemyPool)
+        {
+            temporaryCurrentEnemyGameObjectUsedForSettingUpObjectPool = enemy.prefab;
+            IObjectPool<GameObject> newObjectPool = new ObjectPool<GameObject>(
+                CreatePool, 
+                OnGetFromPool, 
+                OnReleaseToPool, 
+                OnDestroyPoolObject, 
+                true, 
+                DEFAULT_POOL_SIZE, 
+                MAX_MONSTER_WEIGHT);
+
+            currentEnemyPoolObjectPool.Add(enemy.prefab.name, newObjectPool);
+        }
     }
+
+    #region 
+    private GameObject CreatePool()
+    {
+        GameObject newGameObject = Instantiate(temporaryCurrentEnemyGameObjectUsedForSettingUpObjectPool, Vector3.zero, Quaternion.identity);
+
+        if (newGameObject.TryGetComponent<Enemy>(out Enemy enemyComponent))
+        {
+            // enemyComponent.SetPool = currentEnemyPoolObjectPool[enemyComponent.name];
+        }
+
+        return newGameObject;
+    }
+
+    private void OnGetFromPool(GameObject poolObject)
+    {
+        poolObject.SetActive(true);
+    }
+
+    private void OnReleaseToPool(GameObject poolObject)
+    {
+        poolObject.SetActive(false);
+    }
+
+    private void OnDestroyPoolObject(GameObject poolObject)
+    {
+        Destroy(poolObject);
+    } 
+    #endregion
+
+
 
     private WeightedEnemy PickMonster()
     {
@@ -58,7 +111,16 @@ public class EnemyManager : MonoBehaviour
         WeightedEnemy monster = PickMonster();
         Vector3 spawnPosition = PickSpawnLocation();
 
-        GameObject spawnedEnemy = Instantiate(monster.prefab, spawnPosition, Quaternion.identity);
+        GameObject spawnedEnemy = currentEnemyPoolObjectPool[monster.prefab.name].Get();
+
+        if (spawnedEnemy == null)
+        {
+            return;
+        }
+
+        spawnedEnemy.transform.SetPositionAndRotation(spawnPosition, Quaternion.identity);
+
+        // spawnedEnemy.ResetStat();
         
         if (spawnedEnemy.TryGetComponent<Enemy>(out Enemy enemyComponent))
         {
