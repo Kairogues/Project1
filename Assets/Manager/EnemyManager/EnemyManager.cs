@@ -16,7 +16,10 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private List<Enemy> currentEnemyList;
     private int currentMonsterWeight = 0;
 
-
+    private void Awake()
+    {
+        currentEnemyPoolObjectPool = new Dictionary<string, IObjectPool<GameObject>>();
+    }
 
     private GameObject temporaryCurrentEnemyGameObjectUsedForSettingUpObjectPool;
 
@@ -37,11 +40,16 @@ public class EnemyManager : MonoBehaviour
                 DEFAULT_POOL_SIZE, 
                 MAX_MONSTER_WEIGHT);
 
-            currentEnemyPoolObjectPool.Add(enemy.prefab.name, newObjectPool);
+            if (!currentEnemyPoolObjectPool.ContainsKey(enemy.prefab.name)) {
+                currentEnemyPoolObjectPool.Add(enemy.prefab.name, newObjectPool);
+            }
+
         }
     }
 
-    #region 
+    #region
+
+    private int count = 0; 
     private GameObject CreatePool()
     {
         GameObject newGameObject = Instantiate(temporaryCurrentEnemyGameObjectUsedForSettingUpObjectPool, Vector3.zero, Quaternion.identity);
@@ -51,11 +59,15 @@ public class EnemyManager : MonoBehaviour
             // enemyComponent.SetPool = currentEnemyPoolObjectPool[enemyComponent.name];
         }
 
+        count++;
+        Debug.Log(count);
+
         return newGameObject;
     }
 
     private void OnGetFromPool(GameObject poolObject)
     {
+        Debug.Log("GET");
         poolObject.SetActive(true);
     }
 
