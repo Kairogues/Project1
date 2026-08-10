@@ -1,16 +1,19 @@
 using UnityEngine;
+using System;
 
 public class PlayerGoldManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public event Action<int> GoldAmountChanged;
+    private int currentGold = 0;
+    
+    public int GetGold()
     {
-        
+        return currentGold;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetGold(int newGoldAmount)
     {
-        
+        currentGold = newGoldAmount;
+        GoldAmountChanged?.Invoke(currentGold);
     }
 }
