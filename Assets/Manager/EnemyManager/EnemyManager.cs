@@ -59,9 +59,6 @@ public class EnemyManager : MonoBehaviour
             // enemyComponent.SetPool = currentEnemyPoolObjectPool[enemyComponent.name];
         }
 
-        count++;
-        Debug.Log(count);
-
         return newGameObject;
     }
 
