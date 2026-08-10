@@ -9,8 +9,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public PlayerManager playerManager { get; private set; }
-    public WaveManager waveManager { get; private set; }
+    [SerializeField] public PlayerManager playerManager;
+    [SerializeField] public WaveManager waveManager;
 
     private void Awake()
     {
@@ -23,9 +23,6 @@ public class GameManager : MonoBehaviour
         Instance = this;
         
         DontDestroyOnLoad(gameObject);
-
-        playerManager = gameObject.GetComponentInChildren<PlayerManager>();
-        waveManager = gameObject.GetComponentInChildren<WaveManager>();
     }
 
     private void OnEnable()
@@ -37,15 +34,20 @@ public class GameManager : MonoBehaviour
     {
         playerManager.PlayerDied -= OnPlayerDeath;
     }
+
+    private void ProgressWave()
+    {
+        waveManager.ProgressWave();
+    }
     
     void Start()
     {
-        
+        waveManager.StartGame();
     }
 
-    void Update()
+    private void Update()
     {
-        
+        ProgressWave();
     }
 
     private void OnPlayerDeath()

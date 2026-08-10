@@ -505,7 +505,6 @@ MonoBehaviour:
   movementComponent: {fileID: 87518067}
   attackComponent: {fileID: 87518069}
   lifeComponent: {fileID: 87518066}
-  moveInput: {fileID: -6854706207449956105, guid: 8d1c20d0b7fe8424c997d70ebaa54bf6, type: 3}
 --- !u!114 &87518065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -664,6 +663,51 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &428316209
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 428316210}
+  - component: {fileID: 428316211}
+  m_Layer: 0
+  m_Name: EnemyManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &428316210
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 428316209}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 939005747}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &428316211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 428316209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19b626b27c207c745836db63d8a08120, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyManager
+  currentEnemyList: []
 --- !u!1 &439093393
 GameObject:
   m_ObjectHideFlags: 0
@@ -1896,6 +1940,9 @@ Transform:
   - {fileID: 2087347372}
   - {fileID: 742719118}
   - {fileID: 701834062}
+  - {fileID: 974866656}
+  - {fileID: 428316210}
+  - {fileID: 1915554332}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &974866654
@@ -1942,7 +1989,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2087347372}
+  m_Father: {fileID: 939005747}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &974866657
 MonoBehaviour:
@@ -2538,7 +2585,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2087347372}
+  m_Father: {fileID: 939005747}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1915554333
 MonoBehaviour:
@@ -2556,6 +2603,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 56c7d4105dee3c84eb3cda3e83b7065e, type: 2}
   - {fileID: 11400000, guid: 56c7d4105dee3c84eb3cda3e83b7065e, type: 2}
   - {fileID: 11400000, guid: 56c7d4105dee3c84eb3cda3e83b7065e, type: 2}
+  enemyManager: {fileID: 428316211}
 --- !u!1 &2087347371
 GameObject:
   m_ObjectHideFlags: 0
@@ -2585,9 +2633,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 974866656}
-  - {fileID: 1915554332}
+  m_Children: []
   m_Father: {fileID: 939005747}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2087347373
@@ -2602,6 +2648,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ead36b6b0597823498c9d34afd42c062, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  playerManager: {fileID: 974866655}
+  waveManager: {fileID: 1915554333}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

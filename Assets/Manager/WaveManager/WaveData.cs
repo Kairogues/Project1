@@ -19,7 +19,6 @@ public class WaveData : ScriptableObject
 {   
     [SerializeField] public int waveIndex;
     [SerializeField] public float waveDuration;
-    [SerializeField] public int monsterWeightMax = 50;
     [SerializeField] public float spawnInterval;
     [SerializeField] public List<WeightedEnemy> enemyPool;
 }
