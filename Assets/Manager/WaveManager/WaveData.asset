@@ -14,9 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WaveData
   waveIndex: 0
   waveDuration: 10
-  monsterWeightMax: 10
   spawnInterval: 1
   enemyPool:
-  - prefab: {fileID: 2302702833723626492, guid: 8f4217a296570c949831dc2e4dad668e, type: 3}
+  - prefab: {fileID: 6386739899931669373, guid: ea629497c432a43468d92db26d79bf99, type: 3}
     spawnWeight: 1
     spawnChance: 100

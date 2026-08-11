@@ -3,25 +3,24 @@ using UnityEngine.Pool;
 using System.Collections.Generic;
 
 /// <summary>
-///  EnemyManager is used to track every enemy in the current level, it controls the spawning/despawning and life cycle of every enemy
+///  EntityManager is used to track every enemy in the current level, it controls the spawning/despawning and life cycle of every enemy
 /// </summary>
-public class EnemyManager : MonoBehaviour
+public class EntityManager : MonoBehaviour
 {
     private const int MAX_MONSTER_WEIGHT = 300;
     private const int DEFAULT_POOL_SIZE = 50;
     private const float MINIMUM_SPAWN_DISTANCE = 15.0F;
     private const float MAXIMUM_SPAWN_DISTANCE = 25.0F;
     [SerializeField] private List<WeightedEnemy> currentEnemyPool;
-    [SerializeField] private Dictionary<string, IObjectPool<GameObject>> currentEnemyPoolObjectPool;
+    [SerializeField] private Dictionary<string, IObjectPool<Entity>> currentEntityObjectPool;
     [SerializeField] private List<Enemy> currentEnemyList;
+    [SerializeField] private List<Projectile> currentProjectileList;
     private int currentMonsterWeight = 0;
 
     private void Awake()
     {
-        currentEnemyPoolObjectPool = new Dictionary<string, IObjectPool<GameObject>>();
+        currentEntityObjectPool = new Dictionary<string, IObjectPool<Entity>>();
     }
-
-    private GameObject temporaryCurrentEnemyGameObjectUsedForSettingUpObjectPool;
 
     public void SetNewEnemyPool(List<WeightedEnemy> newEnemyPool)
     {
@@ -30,9 +29,19 @@ public class EnemyManager : MonoBehaviour
 
         foreach (WeightedEnemy enemy in currentEnemyPool)
         {
-            temporaryCurrentEnemyGameObjectUsedForSettingUpObjectPool = enemy.prefab;
-            IObjectPool<GameObject> newObjectPool = new ObjectPool<GameObject>(
-                CreatePool, 
+            Entity prefabToSpawn = enemy.prefab;
+            string poolKey = prefabToSpawn.name;
+
+            IObjectPool<Entity> newObjectPool = null;
+
+            newObjectPool = new ObjectPool<Entity>(
+                createFunc: () =>
+                {
+                    Entity newEntity = Instantiate(prefabToSpawn, Vector3.zero, Quaternion.identity, transform);
+                    newEntity.SetPool(newObjectPool);
+
+                    return newEntity;
+                }, 
                 OnGetFromPool, 
                 OnReleaseToPool, 
                 OnDestroyPoolObject, 
@@ -40,46 +49,29 @@ public class EnemyManager : MonoBehaviour
                 DEFAULT_POOL_SIZE, 
                 MAX_MONSTER_WEIGHT);
 
-            if (!currentEnemyPoolObjectPool.ContainsKey(enemy.prefab.name)) {
-                currentEnemyPoolObjectPool.Add(enemy.prefab.name, newObjectPool);
+            if (!currentEntityObjectPool.ContainsKey(poolKey)) {
+                currentEntityObjectPool.Add(poolKey, newObjectPool);
             }
 
         }
     }
 
-    #region
-
-    private int count = 0; 
-    private GameObject CreatePool()
+    #region Pool Callbacks
+    private void OnGetFromPool(Entity entity)
     {
-        GameObject newGameObject = Instantiate(temporaryCurrentEnemyGameObjectUsedForSettingUpObjectPool, Vector3.zero, Quaternion.identity);
-
-        if (newGameObject.TryGetComponent<Enemy>(out Enemy enemyComponent))
-        {
-            // enemyComponent.SetPool = currentEnemyPoolObjectPool[enemyComponent.name];
-        }
-
-        return newGameObject;
+        entity.OnSpawn();
     }
 
-    private void OnGetFromPool(GameObject poolObject)
+    private void OnReleaseToPool(Entity entity)
     {
-        Debug.Log("GET");
-        poolObject.SetActive(true);
+        entity.OnDespawn();
     }
 
-    private void OnReleaseToPool(GameObject poolObject)
+    private void OnDestroyPoolObject(Entity entity)
     {
-        poolObject.SetActive(false);
-    }
-
-    private void OnDestroyPoolObject(GameObject poolObject)
-    {
-        Destroy(poolObject);
+        Destroy(entity);
     } 
     #endregion
-
-
 
     private WeightedEnemy PickMonster()
     {
@@ -110,7 +102,7 @@ public class EnemyManager : MonoBehaviour
         return spawnPosition;
     }
 
-    public void ExecuteSpawnCall()
+    public void SpawnEnemy()
     {
         if (currentMonsterWeight >= MAX_MONSTER_WEIGHT)
         {
@@ -120,7 +112,7 @@ public class EnemyManager : MonoBehaviour
         WeightedEnemy monster = PickMonster();
         Vector3 spawnPosition = PickSpawnLocation();
 
-        GameObject spawnedEnemy = currentEnemyPoolObjectPool[monster.prefab.name].Get();
+        Entity spawnedEnemy = currentEntityObjectPool[monster.prefab.name].Get();
 
         if (spawnedEnemy == null)
         {
@@ -128,10 +120,8 @@ public class EnemyManager : MonoBehaviour
         }
 
         spawnedEnemy.transform.SetPositionAndRotation(spawnPosition, Quaternion.identity);
-
-        // spawnedEnemy.ResetStat();
         
-        if (spawnedEnemy.TryGetComponent<Enemy>(out Enemy enemyComponent))
+        if (spawnedEnemy.TryGetComponent(out Enemy enemyComponent))
         {
             currentEnemyList.Add(enemyComponent);
         }

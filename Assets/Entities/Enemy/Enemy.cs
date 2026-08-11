@@ -1,37 +1,23 @@
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Entity
 {
-    #region EnemyName
-    [SerializeField] private string enemyName;
-    public string EnemyName
+    public override void OnSpawn()
     {
-        set 
-        { 
-            enemyName = value; 
-            name = enemyName;
-        } 
+        base.OnSpawn();
+        
+        // Reset riêng cho Enemy
     }
 
-    private void OnValidate()
+    public void TakeDamage(float amount)
     {
-        if (!string.IsNullOrEmpty(enemyName))
-        {
-            name = enemyName;
-        }
-    }
-    #endregion
-
-    [SerializeField] private IObjectPool<GameObject> objectPool;
-
-    public void SetPool(IObjectPool<GameObject> objectPool)
-    {
-        this.objectPool = objectPool;
+        
     }
 
-    public void ReleaseToPool()
+    protected virtual void Die()
     {
-        objectPool.Release(gameObject);
+        // Khi chết thì tự chui về Pool
+        ReleaseToPool();
     }
 }

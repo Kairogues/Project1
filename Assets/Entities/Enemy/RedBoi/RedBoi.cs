@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class RedBoi : MonoBehaviour
+public class RedBoi : Enemy
 {
     [SerializeField] private MovementComponent movementComponent;
     [SerializeField] private LifeComponent lifeComponent;
@@ -16,8 +16,9 @@ public class RedBoi : MonoBehaviour
         
     }
 
-    private void Die()
+    protected override void Die()
     {
+        base.Die();
         Destroy(gameObject);
     }
 }

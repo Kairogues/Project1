@@ -5,7 +5,7 @@ using System.Collections.Generic;
 [System.Serializable]
 public struct WeightedEnemy
 {
-    public GameObject prefab;
+    public Enemy prefab;
 
     // The "space" this enemy takes up
     public int spawnWeight;

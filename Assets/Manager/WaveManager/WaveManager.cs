@@ -18,7 +18,7 @@ public class WaveManager : MonoBehaviour
     private float currentSpawnCountdown = 0.0f;
     private float currentWaveCountdown = 0.0f;
 
-    [SerializeField] public EnemyManager enemyManager;
+    [SerializeField] public EntityManager entityManager;
 
     private void SpawnIntervalCountdown(float delta)
     {
@@ -26,7 +26,7 @@ public class WaveManager : MonoBehaviour
 
         if (currentSpawnCountdown <= 0.0f)
         {
-            AttemptSpawn();
+            AttemptSpawnEnemy();
             currentSpawnCountdown = currentWave.spawnInterval;
         }
     }
@@ -53,7 +53,7 @@ public class WaveManager : MonoBehaviour
         currentSpawnCountdown = currentWave.spawnInterval;
         currentWaveCountdown = currentWave.waveDuration;
 
-        enemyManager.SetNewEnemyPool(currentWave.enemyPool);
+        entityManager.SetNewEnemyPool(currentWave.enemyPool);
 
         Debug.Log("Start wave " + currentWaveIndex);
         WaveStarted?.Invoke(currentWaveIndex);
@@ -65,10 +65,9 @@ public class WaveManager : MonoBehaviour
         WaveEnded?.Invoke(currentWaveIndex);
     }
 
-    private void AttemptSpawn()
+    private void AttemptSpawnEnemy()
     {
-        // Ask the Spawner to spawn
-        enemyManager.ExecuteSpawnCall();
+        entityManager.SpawnEnemy();
     }
 
     public void StartGame()
