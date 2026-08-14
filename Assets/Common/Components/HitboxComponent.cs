@@ -2,6 +2,7 @@ using System.Data;
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider2D))]
 public class HitboxComponent : MonoBehaviour
 {
     public event Action<HurtboxComponent> HitHurtbox;

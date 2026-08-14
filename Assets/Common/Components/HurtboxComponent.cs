@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider2D))]
 public class HurtboxComponent : MonoBehaviour
 {
     public event Action<float> TookDamage;
