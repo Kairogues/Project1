@@ -49,18 +49,6 @@ public class PoolManager : MonoBehaviour
         return instance;
     }
 
-    public T Spawn<T>(T componentPrefab, Vector3 position, Quaternion rotation, Transform parent = null) where T : Component
-    {
-        GameObject spawingObject = Spawn(componentPrefab.gameObject, position, rotation, parent);
-
-        if (spawingObject != null)
-        {
-            return spawingObject.GetComponent<T>();
-        }
-
-        return null;
-    }
-
     #endregion
 
     #region Release API
@@ -76,14 +64,6 @@ public class PoolManager : MonoBehaviour
         else
         {
             Destroy(instance);
-        }
-    }
-
-    public void Release<T>(T componentInstance) where T : Component
-    {
-        if (componentInstance != null) 
-        {
-            Release(componentInstance.gameObject);
         }
     }
 
@@ -151,6 +131,9 @@ public class PoolManager : MonoBehaviour
         Destroy(pooledObject);
     }
 
+    #endregion
+
+
     public void ClearUnusedPools(List<WeightedEnemy> currentEnemyPool)
     {
         foreach (WeightedEnemy weightedEnemy in currentEnemyPool)
@@ -187,6 +170,4 @@ public class PoolManager : MonoBehaviour
             instanceMap.Remove(instance);
         }
     }
-
-    #endregion
 }
