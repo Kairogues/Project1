@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] public PlayerManager playerManager;
     [SerializeField] public WaveManager waveManager;
+    [SerializeField] public PoolManager poolManager;
+    [SerializeField] public EntityManager entityManager;
 
     private void Awake()
     {
@@ -28,6 +30,7 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         playerManager.PlayerDied += OnPlayerDeath;
+        waveManager.WaveEnded += ClearObjectPool;
     }
 
     private void OnDisable()
@@ -53,6 +56,11 @@ public class GameManager : MonoBehaviour
     private void OnPlayerDeath()
     {
         Debug.Log("Player died!");
+    }
+
+    private void ClearObjectPool(WaveData waveData)
+    {
+        poolManager.ClearUnusedPools(waveData.enemyPool);
     }
 
 

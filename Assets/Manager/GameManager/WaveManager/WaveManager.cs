@@ -8,8 +8,8 @@ using UnityEngine.Pool;
 /// </summary>
 public class WaveManager : MonoBehaviour
 {
-    public event Action<int> WaveStarted;
-    public event Action<int> WaveEnded;
+    public event Action<WaveData> WaveStarted;
+    public event Action<WaveData> WaveEnded;
     public event Action<int> WaveCountdowned;
 
     [SerializeField] private List<WaveData> waveDatas;
@@ -56,13 +56,13 @@ public class WaveManager : MonoBehaviour
         entityManager.SetNewEnemyPool(currentWave.enemyPool);
 
         Debug.Log("Start wave " + currentWaveIndex);
-        WaveStarted?.Invoke(currentWaveIndex);
+        WaveStarted?.Invoke(currentWave);
     }
 
     private void EndCurrentWave()
     {
         Debug.Log("End wave " + currentWaveIndex);
-        WaveEnded?.Invoke(currentWaveIndex);
+        WaveEnded?.Invoke(currentWave);
     }
 
     private void AttemptSpawnEnemy()
