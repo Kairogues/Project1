@@ -10,9 +10,11 @@ public class PoolManager : MonoBehaviour
     [SerializeField] private int maxPoolSize = 300;
 
     // Map the object to its pool
+    // Each entry is a prefab
     private Dictionary<GameObject, IObjectPool<GameObject>> pools = new();
 
-    // Map the object to its PooledObject component, so it will not have to GetComponen()t the PooledObject everytime
+    // Map the object to its PooledObject component, so it will not have to GetComponent() the PooledObject everytime
+    // Each entry is an instance
     private Dictionary<GameObject, PooledObject> instanceMap = new();
 
     private void Awake()
@@ -147,6 +149,43 @@ public class PoolManager : MonoBehaviour
     {
         instanceMap.Remove(pooledObject);
         Destroy(pooledObject);
+    }
+
+    public void ClearUnusedPools(List<WeightedEnemy> currentEnemyPool)
+    {
+        foreach (WeightedEnemy weightedEnemy in currentEnemyPool)
+        {
+            ClearUnusedPool(weightedEnemy.prefab.gameObject);
+        }
+    }
+
+    private void ClearUnusedPool(GameObject prefab)
+    {
+        
+        if (prefab == null || !pools.TryGetValue(prefab, out IObjectPool<GameObject> pool))
+        {
+            return;
+        }
+
+        pool.Clear();
+
+        pools.Remove(prefab);
+
+        List<GameObject> instanceToUnmap = new();
+        foreach (KeyValuePair<GameObject, PooledObject> kvp in instanceMap)
+        {
+            if (kvp.Value != null && kvp.Value.GetOriginPool() == pool)
+            {
+                kvp.Value.SetOriginPool(null);
+                instanceToUnmap.Add(kvp.Key);
+                
+            }
+        }
+
+        foreach (GameObject instance in instanceToUnmap)
+        {
+            instanceMap.Remove(instance);
+        }
     }
 
     #endregion

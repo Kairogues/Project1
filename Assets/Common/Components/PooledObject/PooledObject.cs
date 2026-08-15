@@ -15,6 +15,11 @@ public class PooledObject : MonoBehaviour
         poolablesInChildren = GetComponentsInChildren<IPoolable>(true);
     }
 
+    public IObjectPool<GameObject> GetOriginPool()
+    {
+        return originPool;
+    }
+
     public void SetOriginPool(IObjectPool<GameObject> pool)
     {
         originPool = pool;
