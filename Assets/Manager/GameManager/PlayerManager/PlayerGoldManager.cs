@@ -1,6 +1,7 @@
 using System;
+using UnityEngine;
 
-public class PlayerGoldManager
+public class PlayerGoldManager : MonoBehaviour
 {
     public event Action<int> GoldAmountChanged;
     private int currentGold = 0;

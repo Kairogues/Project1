@@ -11,8 +11,8 @@ public class PlayerManager : MonoBehaviour
     public Player currentPlayer { get; private set; }
     public LifeComponent currentPlayerLifeComponent { get; private set; }
 
-    private PlayerXPManager playerXPManger = new PlayerXPManager();
-    private PlayerGoldManager playerGoldManager = new PlayerGoldManager();
+    [SerializeField] private PlayerXPManager playerXPManger;
+    [SerializeField] private PlayerGoldManager playerGoldManager;
 
     public void RegisterPlayer(Player player, LifeComponent playerLifeComponent)
     {

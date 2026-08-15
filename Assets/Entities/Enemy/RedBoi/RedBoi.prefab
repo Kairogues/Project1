@@ -53,6 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RedBoi
   entityName: RedBoi
+  entityManager: {fileID: 0}
   movementComponent: {fileID: 6126475282744627370}
   lifeComponent: {fileID: 2543519075771321424}
 --- !u!114 &6126475282744627370

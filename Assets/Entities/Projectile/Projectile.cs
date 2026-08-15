@@ -1,12 +1,8 @@
 using UnityEngine;
 
-public class Projectile : Entity
+public class Projectile : MonoBehaviour, IPoolable
 {
-    public override void OnSpawn()
-    {
-        base.OnSpawn();
-        // timer = lifeTime;
-    }
+    [SerializeField] protected PooledObject pooledObjectComponent;
 
     private void Update()
     {
@@ -22,5 +18,21 @@ public class Projectile : Entity
     private void OnTriggerEnter(Collider other)
     {
         ReleaseToPool(); // Tự chết khi chạm mục tiêu
+    }
+
+    protected virtual void ReleaseToPool()
+    {
+        pooledObjectComponent.ReleaseToPool();
+    }
+
+    // IPoolable
+    public virtual void OnSpawn()
+    {
+        GameManager.Instance.entityManager.RegisterProjectile(this);
+    }
+
+    public virtual void OnDespawn()
+    {
+        GameManager.Instance.entityManager.UnregisterProjectile(this);
     }
 }

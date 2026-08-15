@@ -1,23 +1,34 @@
 using UnityEngine;
-using UnityEngine.Pool;
 
-public class Enemy : Entity
+public class Enemy : MonoBehaviour, IPoolable
 {
-    public override void OnSpawn()
+    [SerializeField] protected PooledObject pooledObjectComponent;
+    private int spawnWeight;
+
+    public int GetSpawnWeight()
     {
-        base.OnSpawn();
-        
-        // Reset riêng cho Enemy
+        return spawnWeight;
     }
 
-    public void TakeDamage(float amount)
+    public void SetSpawnWeight(int newSpawnWeight)
     {
-        
+        spawnWeight = newSpawnWeight;
     }
 
     protected virtual void Die()
     {
-        // Khi chết thì tự chui về Pool
-        ReleaseToPool();
+        pooledObjectComponent.ReleaseToPool();
+    }
+
+    // IPoolable
+    public virtual void OnSpawn()
+    {
+        // Reset riêng cho Enemy
+        GameManager.Instance.entityManager.RegisterEnemy(this);
+    }
+
+    public virtual void OnDespawn()
+    {
+        GameManager.Instance.entityManager.UnregisterEnemy(this);
     }
 }

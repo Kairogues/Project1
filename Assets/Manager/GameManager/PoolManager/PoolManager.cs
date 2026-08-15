@@ -134,9 +134,9 @@ public class PoolManager : MonoBehaviour
     #endregion
 
 
-    public void ClearUnusedPools(List<WeightedEnemy> currentEnemyPool)
+    public void ClearUnusedPools(List<EnemySpawnEntry> currentEnemyPool)
     {
-        foreach (WeightedEnemy weightedEnemy in currentEnemyPool)
+        foreach (EnemySpawnEntry weightedEnemy in currentEnemyPool)
         {
             ClearUnusedPool(weightedEnemy.prefab.gameObject);
         }

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PlayerXPManager
+public class PlayerXPManager : MonoBehaviour
 {
     public event Action<int> GainedXP;
     public event Action<int> LeveledUp;
