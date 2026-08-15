@@ -11,7 +11,7 @@ public class PlayerXPManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     [SerializeField] private XPGrowthConfig xpGrowthConfig;
 
-    public PlayerXPManager()
+    private void Awake()
     {
         currentMaxXP = GetXPRequiredForLevelUp(2);
     }
