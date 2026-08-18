@@ -1,14 +1,11 @@
 using UnityEngine;
-using System;
 using System.Collections.Generic;
 
 [System.Serializable]
 public struct EnemySpawnEntry
 {
     public Enemy prefab;
-
-    // The chance this enemy got spawned during a spawn attempt
-    public float spawnChance;
+    public float spawnChance; // The chance this enemy got spawned during a spawn attempt
 }
 
 [CreateAssetMenu(fileName = "WaveData", menuName = "Scriptable Objects/WaveData")]

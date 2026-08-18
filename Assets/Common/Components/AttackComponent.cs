@@ -5,7 +5,10 @@ public class AttackComponent : MonoBehaviour
 {
     [SerializeField] private List<Weapon> weapons;
     private Vector2 facingDirection;
-
+    public Vector2 GetFacingDirection()
+    {
+        return facingDirection;
+    }
     public void UpdateFacingDirection(Vector2 newFacingDirection)
     {
         if (newFacingDirection == Vector2.zero)
@@ -15,25 +18,19 @@ public class AttackComponent : MonoBehaviour
         facingDirection = newFacingDirection;
     }
 
-    public Vector2 GetFacingDirection()
-    {
-        return facingDirection;
-    }
 
-    private void Awake()
-    {
-        
-    }
     
     public void AddWeapon(Weapon newWeapon)
     {
         weapons.Add(newWeapon);
     }
 
+
     public void RemoveWeapon(Weapon newWeapon)
     {
         weapons.Remove(newWeapon);
     }
+
 
     private Quaternion RotationFromDirection()
     {
@@ -43,6 +40,7 @@ public class AttackComponent : MonoBehaviour
 
         return projectileRotation;
     }
+
 
     public void AutoAttackAll()
     {
@@ -54,6 +52,7 @@ public class AttackComponent : MonoBehaviour
             }
         }
     }
+
 
     public void AttackSingleWeapon()
     {

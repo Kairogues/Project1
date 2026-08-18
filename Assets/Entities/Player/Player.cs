@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,16 +9,20 @@ public class Player : MonoBehaviour
     [SerializeField] private LifeComponent lifeComponent;
     private InputAction moveAction;
     
+
+
     void Awake()
     {
         moveAction = InputSystem.actions.FindAction("Move");
         movementComponent.SetBody(body);
     }
 
+
     private void Start()
     {
         GameManager.Instance.playerManager.RegisterPlayer(this, lifeComponent);
     }
+
 
     void Update()
     {

@@ -21,6 +21,8 @@ public class PoolManager : MonoBehaviour
     // Each entry is an instance
     private Dictionary<GameObject, PooledObject> instanceMap = new();
 
+
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -32,8 +34,8 @@ public class PoolManager : MonoBehaviour
         Instance = this;
     }
 
-    #region Spawn API
 
+    #region Spawn API
     public GameObject Spawn(GameObject prefab, Vector3 position, Quaternion rotation, Transform parent = null)
     {
         if (prefab == null) 
@@ -59,11 +61,10 @@ public class PoolManager : MonoBehaviour
 
         return instance;
     }
-
     #endregion
 
-    #region Release API
 
+    #region Release API
     public void Release(GameObject instance)
     {
         if (instance == null) return;
@@ -77,11 +78,10 @@ public class PoolManager : MonoBehaviour
             Destroy(instance);
         }
     }
-
     #endregion
 
-    #region Internal Pool Factory
 
+    #region Internal Pool Factory
     private IObjectPool<GameObject> GetOrCreatePool(GameObject prefab)
     {
         if (pools.TryGetValue(prefab, out IObjectPool<GameObject> existingPool))
@@ -119,6 +119,7 @@ public class PoolManager : MonoBehaviour
         return newPool;
     }
 
+
     private void OnGetFromPool(GameObject pooledObject)
     {
         pooledObject.SetActive(true);
@@ -129,6 +130,7 @@ public class PoolManager : MonoBehaviour
 
         //Debug.Log("Get " + pooledObject.name + " from pool");
     }
+
 
     private void OnReleaseToPool(GameObject pooledObject)
     {
@@ -142,6 +144,7 @@ public class PoolManager : MonoBehaviour
         //Debug.Log("Release " + pooledObject.name + " to pool");
     }
 
+
     private void OnDestroyPoolObject(GameObject pooledObject)
     {
         instanceMap.Remove(pooledObject);
@@ -149,17 +152,8 @@ public class PoolManager : MonoBehaviour
 
         //Debug.Log("Destroy " + pooledObject.name);
     }
-
     #endregion
 
-
-    public void ClearUnusedPools(List<EnemySpawnEntry> currentEnemyPool)
-    {
-        foreach (EnemySpawnEntry weightedEnemy in currentEnemyPool)
-        {
-            ClearUnusedPool(weightedEnemy.prefab.gameObject);
-        }
-    }
 
     #region Cleanup
 
@@ -227,6 +221,16 @@ public class PoolManager : MonoBehaviour
         }
     }
 
+
+    public void ClearUnusedPools(List<EnemySpawnEntry> currentEnemyPool)
+    {
+        foreach (EnemySpawnEntry weightedEnemy in currentEnemyPool)
+        {
+            ClearUnusedPool(weightedEnemy.prefab.gameObject);
+        }
+    }
+
+
     private void ClearUnusedPool(GameObject prefab)
     {
         
@@ -255,6 +259,5 @@ public class PoolManager : MonoBehaviour
             instanceMap.Remove(instance);
         }
     }
-
     #endregion
 }

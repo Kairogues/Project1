@@ -19,6 +19,22 @@ public class GameManager : MonoBehaviour
     [SerializeField] public bool enableWaveSpawning = true;
     [SerializeField] public GameObject fakeEnemy;
 
+
+
+    private void OnEnable()
+    {
+        playerManager.PlayerDied += OnPlayerDeath;
+        waveManager.WaveEnded += ClearObjectPool;
+    }
+
+
+    private void OnDisable()
+    {
+        playerManager.PlayerDied -= OnPlayerDeath;
+        waveManager.WaveEnded -= ClearObjectPool;
+    }
+
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -32,22 +48,6 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    private void OnEnable()
-    {
-        playerManager.PlayerDied += OnPlayerDeath;
-        waveManager.WaveEnded += ClearObjectPool;
-    }
-
-    private void OnDisable()
-    {
-        playerManager.PlayerDied -= OnPlayerDeath;
-        waveManager.WaveEnded -= ClearObjectPool;
-    }
-
-    private void ProgressWave()
-    {
-        waveManager.ProgressWave();
-    }
     
     void Start()
     {
@@ -67,6 +67,13 @@ public class GameManager : MonoBehaviour
             ProgressWave();
         }
     }
+
+
+    private void ProgressWave()
+    {
+        waveManager.ProgressWave();
+    }
+
 
     private void OnPlayerDeath()
     {

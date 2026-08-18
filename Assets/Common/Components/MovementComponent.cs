@@ -4,10 +4,26 @@ using UnityEngine;
 public class MovementComponent : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D body;
+    public void SetBody(Rigidbody2D body)
+    {
+        this.body = body;
+    }
+    
     [SerializeField] private StatComponent statComponent;
     private Stat movementStat;
     private Vector2 currentDirection;
+    public void UpdateDirection(Vector2 newDirection)
+    {
+        currentDirection = newDirection;
+    }
+    
     private float currentSpeed = 0.0f;
+    public void SetSpeed(float newSpeed)
+    {
+        currentSpeed = newSpeed;
+    }
+
+
 
     private void Start()
     {
@@ -16,33 +32,21 @@ public class MovementComponent : MonoBehaviour
         SubscribeToMovementSpeedChanged(UpdateSpeedAfterChanged);
     }
 
+
     private void FixedUpdate()
     {
         body.linearVelocity = currentDirection * currentSpeed * Time.fixedDeltaTime;
     }
+
 
     private void UpdateSpeedAfterChanged(float oldValue, float currentValue, float maxValue)
     {
         SetSpeed(currentValue);
     }
 
-    public void SetSpeed(float newSpeed)
-    {
-        currentSpeed = newSpeed;
-    }
-
-    public void SetBody(Rigidbody2D body)
-    {
-        this.body = body;
-    }
 
     private void SubscribeToMovementSpeedChanged(Action<float, float, float> listener) 
     {
         statComponent.SubscribeToStat(StatType.MOVEMENT_SPEED, listener);
-    }
-
-    public void UpdateDirection(Vector2 newDirection)
-    {
-        currentDirection = newDirection;
     }
 }

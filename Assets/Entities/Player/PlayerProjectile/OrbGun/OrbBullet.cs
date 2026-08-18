@@ -8,16 +8,20 @@ public class OrbBullet : MonoBehaviour
     [SerializeField] private MovementComponent movementComponent;
     private float timeAlive = 3.0f;
 
+
+
     private void Awake()
     {
         movementComponent.SetBody(body);
         movementComponent.UpdateDirection(transform.right);
     }
 
+
     private void Start()
     {
         hitboxComponent.HitHurtbox += ProcessHitHurtbox;
     }
+
 
     private void Update()
     {
@@ -28,10 +32,12 @@ public class OrbBullet : MonoBehaviour
         }
     }
 
+
     private void ProcessHitHurtbox(HurtboxComponent hurtboxComponent)
     {
         SelfDestruct();
     }
+
 
     private void SelfDestruct()
     {

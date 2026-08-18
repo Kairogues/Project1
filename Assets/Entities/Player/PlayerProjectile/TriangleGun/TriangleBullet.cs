@@ -11,16 +11,19 @@ public class TriangleBullet : MonoBehaviour
     private bool isSpinning = false;
     
 
+
     private void Awake()
     {
         movementComponent.SetBody(body);
         movementComponent.UpdateDirection(transform.right);
     }
 
+
     private void Start()
     {
         hitboxComponent.HitHurtbox += ProcessHitHurtbox;
     }
+
 
     private void Update()
     {
@@ -41,17 +44,20 @@ public class TriangleBullet : MonoBehaviour
         }
     }
 
+
     private void ProcessHitHurtbox(HurtboxComponent hurtboxComponent)
     {
         spinTime += timeFly;
         timeFly = 0.0f;
     }
 
+
     private void SpinInPlace()
     {
         movementComponent.UpdateDirection(Vector2.zero);
         isSpinning = true;
     }
+
 
     private void SelfDestruct()
     {

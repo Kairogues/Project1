@@ -7,12 +7,12 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     public event Action PlayerDied;
-
+    [SerializeField] private PlayerXPManager playerXPManger;
+    [SerializeField] private PlayerGoldManager playerGoldManager;
     public Player currentPlayer { get; private set; }
     public LifeComponent currentPlayerLifeComponent { get; private set; }
 
-    [SerializeField] private PlayerXPManager playerXPManger;
-    [SerializeField] private PlayerGoldManager playerGoldManager;
+    
 
     public void RegisterPlayer(Player player, LifeComponent playerLifeComponent)
     {
@@ -30,6 +30,7 @@ public class PlayerManager : MonoBehaviour
         currentPlayerLifeComponent = playerLifeComponent;
         currentPlayerLifeComponent.Died += AnnouncePlayerDeath;
     }
+
 
     private void AnnouncePlayerDeath()
     {

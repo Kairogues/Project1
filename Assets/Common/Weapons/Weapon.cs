@@ -1,6 +1,4 @@
 using UnityEngine;
-using System.Collections;
-using System.ComponentModel;
 
 [System.Serializable]
 public class Weapon
@@ -9,11 +7,14 @@ public class Weapon
     // [SerializeField] private bool canAttack = true;
     private float nextCanAttackTime;
 
+
+
     public Weapon (WeaponData newWeaponData)
     {
         weaponData = newWeaponData;
         nextCanAttackTime = Time.time;
     }
+
 
     public void ChangeWeapon(WeaponData newWeaponData)
     {
@@ -21,12 +22,14 @@ public class Weapon
         nextCanAttackTime = Time.time;
     }
 
+
     //public IEnumerator CoolingDown()
     //{
     //    canAttack = false;
     //    yield return new WaitForSeconds(weaponData.cooldown);
     //    canAttack = true;
     //}
+
 
     public bool CanAttack()
     {
@@ -37,6 +40,7 @@ public class Weapon
 
         return true;
     }
+
 
     public void Attack(Vector3 initPosition, Quaternion initRotation)
     {

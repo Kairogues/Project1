@@ -1,7 +1,5 @@
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 [CreateAssetMenu(fileName = "StatSet", menuName = "Scriptable Objects/StatSet")]
 public class StatSet : ScriptableObject
@@ -15,10 +13,7 @@ public class StatSet : ScriptableObject
         new Stat(StatType.MOVEMENT_SPEED, 100.0f, false, 0.0f)
     };
 
-    public List<Stat> GetStatList()
-    {
-        return statList;
-    }
+
 
     public void AddStat(Stat newStat)
     {
@@ -30,6 +25,7 @@ public class StatSet : ScriptableObject
 
         statList.Add(newStat);
     }
+
 
     public bool RemoveStat(StatType type)
     {
@@ -43,6 +39,7 @@ public class StatSet : ScriptableObject
         
         return false;
     }
+
 
     public Stat GetStatInCurrentList(StatType type)
     {

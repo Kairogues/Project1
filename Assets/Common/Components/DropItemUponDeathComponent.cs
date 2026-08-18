@@ -7,10 +7,13 @@ public class DropItemUponDeathComponent : MonoBehaviour
     [SerializeField] private List<GameObject> itemsToDrop = new();
     [SerializeField] private LifeComponent lifeComponent;
 
+
+
     private void Start()
     {
         lifeComponent.Died += DropItems;
     }
+
 
     private void DropItems()
     {

@@ -1,25 +1,27 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
-using System.Data;
 
 public class StatComponent : MonoBehaviour
 {
     [SerializeField] private StatSet statSetPrototype;
     private StatSet statSet;
-
-    [SerializeField] private Dictionary<int, StatBuff> buffDictionary = new Dictionary<int, StatBuff>();
+    private Dictionary<int, StatBuff> buffDictionary = new Dictionary<int, StatBuff>();
     private int nextBuffID = 0;
+
+
 
     private void Awake()
     {
         statSet = Instantiate(statSetPrototype);
     }
 
+
     private void OnDestroy()
     {
         Destroy(statSet);
     }
+
 
     public void RecalculateStatAfterBuff(StatType type)
     {
@@ -53,6 +55,7 @@ public class StatComponent : MonoBehaviour
         statSet.GetStatInCurrentList(type).UpdateStat(currentStatValue);
     }
 
+
     // Temporary, work just fine but I really do not like this
     public int AddBuff(StatBuff newBuff)
     {
@@ -68,6 +71,7 @@ public class StatComponent : MonoBehaviour
         return currentBuffID;
     }
 
+
     // Temporary, work just fine but I really do not like this
     public bool RemoveBuff(int buffIDToRemove)
     {
@@ -82,6 +86,7 @@ public class StatComponent : MonoBehaviour
         return false;
     }
 
+
     public Stat GetStat(StatType type)
     {
         Stat stat = statSet.GetStatInCurrentList(type);
@@ -94,11 +99,13 @@ public class StatComponent : MonoBehaviour
         return stat;
     }
 
+
     public void SubscribeToStat(StatType type, Action<float, float, float> listener)
     {
         Stat stat = GetStat(type);
         stat.StatChanged += listener;
     }
+
 
     public void UnSubscribeToStat(StatType type, Action<float, float, float> listener)
     {

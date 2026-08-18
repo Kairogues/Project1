@@ -8,22 +8,24 @@ using UnityEngine.Pool;
 public class PooledObject : MonoBehaviour
 {
     private IObjectPool<GameObject> originPool;
+    public IObjectPool<GameObject> GetOriginPool()
+    {
+        return originPool;
+    }
+    public void SetOriginPool(IObjectPool<GameObject> pool)
+    {
+        originPool = pool;
+    }
+
     private IPoolable[] poolablesInChildren;
+
+
 
     private void Awake()
     {
         poolablesInChildren = GetComponentsInChildren<IPoolable>(true);
     }
 
-    public IObjectPool<GameObject> GetOriginPool()
-    {
-        return originPool;
-    }
-
-    public void SetOriginPool(IObjectPool<GameObject> pool)
-    {
-        originPool = pool;
-    }
 
     public void TriggerSpawn()
     {
@@ -34,6 +36,7 @@ public class PooledObject : MonoBehaviour
         }
     }
 
+
     public void TriggerDespawn()
     {
         for (int i = 0; i < poolablesInChildren.Length; i++)
@@ -42,6 +45,7 @@ public class PooledObject : MonoBehaviour
             poolablesInChildren[i].OnDespawn();
         }
     }
+
 
     public void ReleaseToPool()
     {

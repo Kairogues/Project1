@@ -5,8 +5,9 @@ using UnityEngine;
 public class HurtboxComponent : MonoBehaviour
 {
     public event Action<float> TookDamage;
-
     [SerializeField] private LifeComponent lifeComponent;
+
+
 
     public void TakeDamge(float damage)
     {

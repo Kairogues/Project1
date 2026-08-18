@@ -26,6 +26,54 @@ public class EntityManager : MonoBehaviour
         currentMonsterWeight -= enemy.GetSpawnWeight() * 4;
         currentEnemyList.Remove(enemy);
     }
+    // =====================================
+
+    // ============ PROJECTILE =============
+    [SerializeField] private List<Projectile> currentProjectileList = new();
+    public void RegisterProjectile(Projectile projectile)
+    {
+        currentProjectileList.Add(projectile);;
+    }
+    public void UnregisterProjectile(Projectile projectile)
+    {
+        currentProjectileList.Remove(projectile);
+    }
+    // =====================================
+
+    // ============== XP ORB ===============
+    [SerializeField] private List<Pickupable> currentXPOrbList = new();
+    public void RegisterXPOrb(Pickupable xpOrb)
+    {
+        currentXPOrbList.Add(xpOrb);
+    }
+    public void UnregisterXPOrb(Pickupable xpOrb)
+    {
+        currentXPOrbList.Remove(xpOrb);
+    }
+    // =====================================
+
+    // ============ PICKUPABLE =============
+    [SerializeField] private List<Pickupable> currentPickupableList = new();
+    public void RegisterPickupable(Pickupable pickupable)
+    {
+        currentPickupableList.Add(pickupable);
+    }
+    public void UnregisterPickupable(Pickupable pickupable)
+    {
+        currentPickupableList.Remove(pickupable);
+    }
+    // =====================================
+
+
+
+    private void Awake()
+    {
+        // enemySpawner.SetEntityManager(this);
+        // projectileSpawner.SetEntityManager(this);
+        // xpOrbSpawner.SetEntityManager(this);
+        // pickupableSpawner.SetEntityManager(this);
+    }
+
 
     public bool ReachMobCap()
     {
@@ -35,32 +83,5 @@ public class EntityManager : MonoBehaviour
         }
 
         return false;
-    }
-    // =====================================
-
-    // ============ PROJECTILE =============
-    [SerializeField] private List<Projectile> currentProjectileList = new();
-    public void RegisterProjectile(Projectile projectile) => currentProjectileList.Add(projectile);
-    public void UnregisterProjectile(Projectile projectile) => currentProjectileList.Remove(projectile);
-    // =====================================
-
-    // ============== XP ORB ===============
-    [SerializeField] private List<Pickupable> currentXPOrbList = new();
-    public void RegisterXPOrb(Pickupable xpOrb) => currentXPOrbList.Add(xpOrb);
-    public void UnregisterXPOrb(Pickupable xpOrb) => currentXPOrbList.Remove(xpOrb);
-    // =====================================
-
-    // ============ PICKUPABLE =============
-    [SerializeField] private List<Pickupable> currentPickupableList = new();
-    public void RegisterPickupable(Pickupable pickupable) => currentPickupableList.Add(pickupable);
-    public void UnregisterPickupable(Pickupable pickupable) => currentPickupableList.Remove(pickupable);
-    // =====================================
-
-    private void Awake()
-    {
-        // enemySpawner.SetEntityManager(this);
-        // projectileSpawner.SetEntityManager(this);
-        // xpOrbSpawner.SetEntityManager(this);
-        // pickupableSpawner.SetEntityManager(this);
     }
 }

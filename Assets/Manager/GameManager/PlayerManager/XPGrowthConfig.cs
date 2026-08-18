@@ -1,5 +1,4 @@
 using UnityEngine;
-using System;
 
 [System.Serializable]
 public struct LevelTier
@@ -13,6 +12,8 @@ public class XPGrowthConfig : ScriptableObject
 {
     [SerializeField] public int baseXP = 5; // Level 1 -> 2
     [SerializeField] public LevelTier[] tiers;
+
+
 
     public int GetXPForLevel(int level)
     {

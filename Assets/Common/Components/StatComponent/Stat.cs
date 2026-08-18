@@ -8,9 +8,28 @@ public class Stat
     public event Action<float, float, float> StatChanged;
 
     [SerializeField] private StatType statType;
+    public StatType GetStatType()
+    {
+        return statType;
+    }
+
     [SerializeField] private float currentValue;
+    public float GetCurrentValue()
+    {
+        return currentValue;
+    }
+
     [SerializeField] private bool useMaxValue;
     [SerializeField] private float maxValue;
+    public float GetMaxValue()
+    {
+        return maxValue;
+    }
+    public void SetMaxValue(float newMaxValue) 
+    {
+        maxValue = newMaxValue;
+    }
+
 
     public Stat(StatType type = StatType.HEALTH, float initCurrentValue = 0, bool initUseMaxValue = false, float initMaxValue = 0)
     {
@@ -20,25 +39,12 @@ public class Stat
         maxValue = initMaxValue;
     }
 
+
     public void MaximizeCurrentStat()
     {
         currentValue = maxValue;
     }
 
-    public StatType GetStatType()
-    {
-        return statType;
-    }
-
-    public float GetCurrentValue()
-    {
-        return currentValue;
-    }
-
-    public float GetMaxValue()
-    {
-        return maxValue;
-    }
 
     public void UpdateStat(float newValue) 
     {
@@ -50,10 +56,5 @@ public class Stat
         }
 
         StatChanged?.Invoke(oldValue, currentValue, maxValue);
-    }
-
-    public void UpdateMaxStat(float newMaxValue) 
-    {
-        maxValue = newMaxValue;
     }
 }

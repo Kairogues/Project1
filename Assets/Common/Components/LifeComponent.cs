@@ -4,9 +4,10 @@ using UnityEngine;
 public class LifeComponent : MonoBehaviour
 {
     public event Action Died;
-
     [SerializeField] private StatComponent statComponent;
     private Stat healthStat;
+
+
 
     private void Start()
     {
@@ -14,11 +15,13 @@ public class LifeComponent : MonoBehaviour
         healthStat.MaximizeCurrentStat();
     }
 
+
     public void Heal(float amount)
     {
         float newHealth = healthStat.GetCurrentValue() + amount;
         healthStat.UpdateStat(newHealth);
     }
+
 
     public void Damage(float amount)
     {
@@ -33,10 +36,12 @@ public class LifeComponent : MonoBehaviour
         healthStat.UpdateStat(newHealth);
     }
 
+
     private void SubscribeToHealthChanged(Action<float, float, float> listener) 
     {
         statComponent.SubscribeToStat(StatType.HEALTH, listener);
     }
+
 
     private void Die()
     {

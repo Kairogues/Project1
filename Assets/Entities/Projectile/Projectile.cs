@@ -4,6 +4,8 @@ public class Projectile : MonoBehaviour, IPoolable
 {
     [SerializeField] protected PooledObject pooledObjectComponent;
 
+
+
     private void Update()
     {
         // transform.Translate(Vector3.forward * (speed * Time.deltaTime));
@@ -15,15 +17,12 @@ public class Projectile : MonoBehaviour, IPoolable
         // }
     }
 
+
     private void OnTriggerEnter(Collider other)
     {
         ReleaseToPool(); // Tự chết khi chạm mục tiêu
     }
 
-    protected virtual void ReleaseToPool()
-    {
-        pooledObjectComponent.ReleaseToPool();
-    }
 
     // IPoolable
     public virtual void OnSpawn()
@@ -31,8 +30,15 @@ public class Projectile : MonoBehaviour, IPoolable
         GameManager.Instance.entityManager.RegisterProjectile(this);
     }
 
+
     public virtual void OnDespawn()
     {
         GameManager.Instance.entityManager.UnregisterProjectile(this);
+    }
+
+
+    protected virtual void ReleaseToPool()
+    {
+        pooledObjectComponent.ReleaseToPool();
     }
 }

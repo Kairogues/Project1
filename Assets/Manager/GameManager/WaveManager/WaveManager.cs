@@ -14,34 +14,26 @@ public class WaveManager : MonoBehaviour
     public event Action<WaveData> WaveStarted;
     public event Action<WaveData> WaveEnded;
     public event Action<int> WaveCountdowned;
-
     [SerializeField] private List<WaveData> waveDatas;
     private WaveData currentWave;
     private int currentWaveIndex = -1;
     private float currentSpawnCountdown = 0.0f;
     private float currentWaveCountdown = 0.0f;
 
-    private void SpawnIntervalCountdown(float delta)
-    {
-        currentSpawnCountdown -= delta;
 
-        if (currentSpawnCountdown <= 0.0f)
-        {
-            AttemptSpawnEnemy();
-            currentSpawnCountdown = currentWave.spawnInterval;
-        }
+
+    public void StartGame()
+    {
+        StartNewWave();
     }
 
-    private void WaveCountdown(float delta)
-    {
-        currentWaveCountdown -= delta;
 
-        if (currentWaveCountdown <= 0.0f)
-        {
-            EndCurrentWave();
-            StartNewWave();
-        }
+    public void ProgressWave()
+    {
+        SpawnIntervalCountdown(Time.deltaTime);
+        WaveCountdown(Time.deltaTime);
     }
+
 
     private void StartNewWave()
     {
@@ -57,20 +49,36 @@ public class WaveManager : MonoBehaviour
         WaveStarted?.Invoke(currentWave);
     }
 
+
     private void EndCurrentWave()
     {
         WaveEnded?.Invoke(currentWave);
     }
 
-    private void AttemptSpawnEnemy()
-    {
-        if (GameManager.Instance.entityManager.ReachMobCap())
-        {
-            return;
-        }
 
-        SpawnEnemy();
+    private void SpawnIntervalCountdown(float delta)
+    {
+        currentSpawnCountdown -= delta;
+
+        if (currentSpawnCountdown <= 0.0f)
+        {
+            AttemptSpawnEnemy();
+            currentSpawnCountdown = currentWave.spawnInterval;
+        }
     }
+
+
+    private void WaveCountdown(float delta)
+    {
+        currentWaveCountdown -= delta;
+
+        if (currentWaveCountdown <= 0.0f)
+        {
+            EndCurrentWave();
+            StartNewWave();
+        }
+    }
+
 
     private EnemySpawnEntry PickMonster()
     {
@@ -90,6 +98,7 @@ public class WaveManager : MonoBehaviour
         return currentWave.enemyPool[0];
     }
 
+
     private Vector3 PickSpawnLocation()
     {
         float randomDistance = UnityEngine.Random.Range(MINIMUM_SPAWN_DISTANCE, MAXIMUM_SPAWN_DISTANCE);
@@ -100,6 +109,18 @@ public class WaveManager : MonoBehaviour
 
         return spawnPosition;
     }
+
+
+    private void AttemptSpawnEnemy()
+    {
+        if (GameManager.Instance.entityManager.ReachMobCap())
+        {
+            return;
+        }
+
+        SpawnEnemy();
+    }
+
 
     public void SpawnEnemy()
     {
@@ -112,16 +133,5 @@ public class WaveManager : MonoBehaviour
         {
             return;
         }
-    }
-
-    public void StartGame()
-    {
-        StartNewWave();
-    }
-
-    public void ProgressWave()
-    {
-        SpawnIntervalCountdown(Time.deltaTime);
-        WaveCountdown(Time.deltaTime);
     }
 }
