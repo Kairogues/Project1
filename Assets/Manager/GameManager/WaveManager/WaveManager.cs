@@ -1,13 +1,16 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
-using UnityEngine.Pool;
 
 /// <summary>
-///  WaveManager is used to track the progression of the level
+/// WaveManager is used to track the progression of the level
+/// Manages waves progression, enemy pools, wave spawning
+/// Issues enemies from the ObjectPool and hand them to EntityManager
 /// </summary>
 public class WaveManager : MonoBehaviour
 {
+    private const float MINIMUM_SPAWN_DISTANCE = 15.0F;
+    private const float MAXIMUM_SPAWN_DISTANCE = 25.0F;
     public event Action<WaveData> WaveStarted;
     public event Action<WaveData> WaveEnded;
     public event Action<int> WaveCountdowned;
@@ -17,8 +20,6 @@ public class WaveManager : MonoBehaviour
     private int currentWaveIndex = -1;
     private float currentSpawnCountdown = 0.0f;
     private float currentWaveCountdown = 0.0f;
-
-    [SerializeField] public EntityManager entityManager;
 
     private void SpawnIntervalCountdown(float delta)
     {
@@ -53,21 +54,64 @@ public class WaveManager : MonoBehaviour
         currentSpawnCountdown = currentWave.spawnInterval;
         currentWaveCountdown = currentWave.waveDuration;
 
-        entityManager.SetNewEnemyPool(currentWave.enemyPool);
-
-        Debug.Log("Start wave " + currentWaveIndex);
         WaveStarted?.Invoke(currentWave);
     }
 
     private void EndCurrentWave()
     {
-        Debug.Log("End wave " + currentWaveIndex);
         WaveEnded?.Invoke(currentWave);
     }
 
     private void AttemptSpawnEnemy()
     {
-        entityManager.SpawnEnemy();
+        if (GameManager.Instance.entityManager.ReachMobCap())
+        {
+            return;
+        }
+
+        SpawnEnemy();
+    }
+
+    private EnemySpawnEntry PickMonster()
+    {
+        int random = UnityEngine.Random.Range(0, 100);
+        float accumulation = 0;
+        
+        foreach (EnemySpawnEntry enemy in currentWave.enemyPool)
+        {
+            if (random < (accumulation + enemy.spawnChance))
+            {
+                return enemy;
+            }
+
+            accumulation += enemy.spawnChance;
+        }
+
+        return currentWave.enemyPool[0];
+    }
+
+    private Vector3 PickSpawnLocation()
+    {
+        float randomDistance = UnityEngine.Random.Range(MINIMUM_SPAWN_DISTANCE, MAXIMUM_SPAWN_DISTANCE);
+        float randomAngle = UnityEngine.Random.Range(0.0f, 360.0f) * Mathf.Deg2Rad;
+
+        Vector3 spawnDirection = new Vector3(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle), 0);
+        Vector3 spawnPosition = GameManager.Instance.playerManager.currentPlayer.transform.position + (spawnDirection * randomDistance);
+
+        return spawnPosition;
+    }
+
+    public void SpawnEnemy()
+    {
+        EnemySpawnEntry monster = PickMonster();
+        Vector3 spawnPosition = PickSpawnLocation();
+
+        GameObject spawnedEnemy = GameManager.Instance.poolManager.Spawn(monster.prefab.gameObject, spawnPosition, Quaternion.identity, GameManager.Instance.entityManager.transform);
+
+        if (spawnedEnemy == null)
+        {
+            return;
+        }
     }
 
     public void StartGame()

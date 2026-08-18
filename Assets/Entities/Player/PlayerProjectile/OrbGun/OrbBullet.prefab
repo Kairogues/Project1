@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4db3b6c65edb3ad47bb623e55fdba4a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StatsComponent
-  statSet: {fileID: 11400000, guid: 8dc42dd246a0251488092c2f0fd41ef2, type: 2}
+  statSetPrototype: {fileID: 11400000, guid: 8dc42dd246a0251488092c2f0fd41ef2, type: 2}
 --- !u!212 &5111979726522703899
 SpriteRenderer:
   serializedVersion: 2

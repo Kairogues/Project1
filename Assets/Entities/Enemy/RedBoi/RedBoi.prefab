@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6212824190552222622}
   - component: {fileID: 6386739899931669373}
+  - component: {fileID: 3210883320239082284}
   - component: {fileID: 6126475282744627370}
   - component: {fileID: 2543519075771321424}
   - component: {fileID: 8637229688401896946}
@@ -52,10 +53,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed0093ee24795dc40a7ab71015b96f5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RedBoi
-  entityName: RedBoi
-  entityManager: {fileID: 0}
+  pooledObjectComponent: {fileID: 3210883320239082284}
+  spawnWeight: 1
   movementComponent: {fileID: 6126475282744627370}
   lifeComponent: {fileID: 2543519075771321424}
+--- !u!114 &3210883320239082284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5202842604318721309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99b8d2d7f0fe7ae45a9a71421a2cc547, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PooledObject
 --- !u!114 &6126475282744627370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4db3b6c65edb3ad47bb623e55fdba4a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StatsComponent
-  statSet: {fileID: 11400000, guid: 1ec1df3b678818a42bf89a0d15482a6d, type: 2}
+  statSetPrototype: {fileID: 11400000, guid: 1ec1df3b678818a42bf89a0d15482a6d, type: 2}
 --- !u!114 &8936210269203623224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,8 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11bc556a81620d342a1ad1dbf14b8d79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropItemUponDeathComponent
-  itemsToDrop:
-  - {fileID: 0}
+  itemsToDrop: []
   lifeComponent: {fileID: 2543519075771321424}
 --- !u!212 &3653655367367566065
 SpriteRenderer:

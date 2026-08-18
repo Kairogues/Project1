@@ -3,7 +3,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour, IPoolable
 {
     [SerializeField] protected PooledObject pooledObjectComponent;
-    private int spawnWeight;
+    [SerializeField] private int spawnWeight;
 
     public int GetSpawnWeight()
     {

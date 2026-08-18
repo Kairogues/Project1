@@ -3,7 +3,9 @@ using System;
 using System.Collections;
 
 /// <summary>
-///  GameManager is a singleton used to track every other managers, it controls the current level and state of the game
+/// A singleton responsible for orchestrating the active game loop and runtime rules.
+/// Manages and orchestrates other gameplay managers to control the progression of the game, manages the state of the game
+/// and the transition between different states
 /// </summary>
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +15,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] public WaveManager waveManager;
     [SerializeField] public PoolManager poolManager;
     [SerializeField] public EntityManager entityManager;
+    
+    [SerializeField] public bool enableWaveSpawning = true;
+    [SerializeField] public GameObject fakeEnemy;
 
     private void Awake()
     {
@@ -36,6 +41,7 @@ public class GameManager : MonoBehaviour
     private void OnDisable()
     {
         playerManager.PlayerDied -= OnPlayerDeath;
+        waveManager.WaveEnded -= ClearObjectPool;
     }
 
     private void ProgressWave()
@@ -45,12 +51,21 @@ public class GameManager : MonoBehaviour
     
     void Start()
     {
-        waveManager.StartGame();
+        if (enableWaveSpawning)
+        {
+            waveManager.StartGame();
+        } else
+        {
+            poolManager.Spawn(fakeEnemy, new Vector3(-10, 0, 0), Quaternion.identity, entityManager.transform);
+        }
     }
 
     private void Update()
     {
-        ProgressWave();
+        if (enableWaveSpawning)
+        {
+            ProgressWave();
+        }
     }
 
     private void OnPlayerDeath()
@@ -60,7 +75,7 @@ public class GameManager : MonoBehaviour
 
     private void ClearObjectPool(WaveData waveData)
     {
-        poolManager.ClearUnusedPools(waveData.enemyPool);
+        poolManager.TryRemoveInactivePools();
     }
 
 

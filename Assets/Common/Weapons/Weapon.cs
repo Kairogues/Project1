@@ -46,8 +46,7 @@ public class Weapon
         }
 
         // Quaternion spawnRotation = Quaternion.Euler(initRotation);
-        UnityEngine.Object.Instantiate(weaponData.projectile, initPosition + weaponData.offset, initRotation);
-        UnityEngine.Debug.Log("Attacking from " + weaponData.weaponName);
+        Object.Instantiate(weaponData.projectile, initPosition + weaponData.offset, initRotation);
         nextCanAttackTime = Time.time + weaponData.cooldown;
         //StartCoroutine(CoolingDown());
     }

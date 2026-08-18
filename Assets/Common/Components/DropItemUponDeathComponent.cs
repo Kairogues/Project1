@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class DropItemUponDeathComponent : MonoBehaviour
 {
     private const float DROP_DISTANCE = 1.0F;
-    [SerializeField] private List<GameObject> itemsToDrop;
+    [SerializeField] private List<GameObject> itemsToDrop = new();
     [SerializeField] private LifeComponent lifeComponent;
 
     private void Start()
@@ -14,10 +14,15 @@ public class DropItemUponDeathComponent : MonoBehaviour
 
     private void DropItems()
     {
+        if (itemsToDrop.Count == 0)
+        {
+            return;
+        }
+
         foreach (GameObject item in itemsToDrop)
         {
-            float randomDisplacementX = UnityEngine.Random.Range(-DROP_DISTANCE, DROP_DISTANCE);
-            float randomDisplacementY = UnityEngine.Random.Range(-DROP_DISTANCE, DROP_DISTANCE);
+            float randomDisplacementX = Random.Range(-DROP_DISTANCE, DROP_DISTANCE);
+            float randomDisplacementY = Random.Range(-DROP_DISTANCE, DROP_DISTANCE);
 
             Vector3 spawnPosition = new Vector3(
                 transform.position.x + randomDisplacementX, 

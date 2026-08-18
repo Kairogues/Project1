@@ -29,6 +29,7 @@ public class PooledObject : MonoBehaviour
     {
         for (int i = 0; i < poolablesInChildren.Length; i++)
         {
+            //Debug.Log("Triggering spawn from PooledObject");
             poolablesInChildren[i].OnSpawn();
         }
     }
@@ -37,6 +38,7 @@ public class PooledObject : MonoBehaviour
     {
         for (int i = 0; i < poolablesInChildren.Length; i++)
         {
+            //Debug.Log("Triggering despawn from PooledObject");
             poolablesInChildren[i].OnDespawn();
         }
     }
@@ -45,10 +47,13 @@ public class PooledObject : MonoBehaviour
     {
         if (originPool != null)
         {
+            Debug.Log("BACK TO THE POOL");
             originPool.Release(gameObject);
         }
         else
         {
+            Debug.Log("No pool, destroy");
+            TriggerDespawn();
             Destroy(gameObject);
         }
     }

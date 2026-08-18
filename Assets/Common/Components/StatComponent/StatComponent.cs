@@ -5,11 +5,22 @@ using System.Data;
 
 public class StatComponent : MonoBehaviour
 {
-    [SerializeField] private StatSet statSet;
+    [SerializeField] private StatSet statSetPrototype;
+    private StatSet statSet;
 
     [SerializeField] private Dictionary<int, StatBuff> buffDictionary = new Dictionary<int, StatBuff>();
     private int nextBuffID = 0;
-    
+
+    private void Awake()
+    {
+        statSet = Instantiate(statSetPrototype);
+    }
+
+    private void OnDestroy()
+    {
+        Destroy(statSet);
+    }
+
     public void RecalculateStatAfterBuff(StatType type)
     {
         Stat stat = statSet.GetStatInCurrentList(type);

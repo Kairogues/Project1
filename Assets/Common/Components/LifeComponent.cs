@@ -12,17 +12,12 @@ public class LifeComponent : MonoBehaviour
     {
         healthStat = statComponent.GetStat(StatType.HEALTH);
         healthStat.MaximizeCurrentStat();
-
-        UnityEngine.Debug.Log(gameObject.name + " has " + healthStat.GetCurrentValue() + " health");
     }
 
     public void Heal(float amount)
     {
         float newHealth = healthStat.GetCurrentValue() + amount;
         healthStat.UpdateStat(newHealth);
-
-        UnityEngine.Debug.Log(gameObject.name + " healed " + amount);
-        UnityEngine.Debug.Log(gameObject.name + " has " + healthStat.GetCurrentValue() + " health");
     }
 
     public void Damage(float amount)
@@ -36,9 +31,6 @@ public class LifeComponent : MonoBehaviour
         }
 
         healthStat.UpdateStat(newHealth);
-
-        UnityEngine.Debug.Log(gameObject.name + " took " + amount + " amount");
-        UnityEngine.Debug.Log(gameObject.name + " has " + healthStat.GetCurrentValue() + " health");
     }
 
     private void SubscribeToHealthChanged(Action<float, float, float> listener) 
@@ -49,7 +41,5 @@ public class LifeComponent : MonoBehaviour
     private void Die()
     {
         Died?.Invoke();
-
-        print("You Died");
     }
 }

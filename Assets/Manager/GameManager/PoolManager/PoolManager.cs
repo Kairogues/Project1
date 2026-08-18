@@ -2,6 +2,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
+/// <summary>
+/// A Manager responsible for GameObject pooling.
+/// Manages instantiation, lifecycle dispatch (spawn/despawn), and memory cleanup
+/// </summary>
 public class PoolManager : MonoBehaviour
 {
     public static PoolManager Instance { get; private set; }
@@ -39,6 +43,13 @@ public class PoolManager : MonoBehaviour
 
         IObjectPool<GameObject> pool = GetOrCreatePool(prefab);
         GameObject instance = pool.Get();
+
+        /*
+        if (instance.TryGetComponent(out PooledObject pooledObj))
+        {
+            pooledObj.SetOriginPool(pool);
+        }
+        */
 
         instance.transform.SetPositionAndRotation(position, rotation);
         if (parent != null)
@@ -85,13 +96,15 @@ public class PoolManager : MonoBehaviour
             {
                 GameObject instance = Instantiate(prefab);
 
-                if (!instance.TryGetComponent(out PooledObject pooledObj))
+                if (instance.TryGetComponent(out PooledObject pooledObj))
                 {
-                    pooledObj = instance.AddComponent<PooledObject>();
+                    pooledObj.SetOriginPool(newPool);
                 }
 
-                pooledObj.SetOriginPool(newPool);
                 instanceMap[instance] = pooledObj;
+
+                //Debug.Log("Created " + instance.name);
+
                 return instance;
             },
             OnGetFromPool,
@@ -113,6 +126,8 @@ public class PoolManager : MonoBehaviour
         {
             pooledObj.TriggerSpawn();
         }
+
+        //Debug.Log("Get " + pooledObject.name + " from pool");
     }
 
     private void OnReleaseToPool(GameObject pooledObject)
@@ -123,12 +138,16 @@ public class PoolManager : MonoBehaviour
         }
 
         pooledObject.SetActive(false);
+
+        //Debug.Log("Release " + pooledObject.name + " to pool");
     }
 
     private void OnDestroyPoolObject(GameObject pooledObject)
     {
         instanceMap.Remove(pooledObject);
         Destroy(pooledObject);
+
+        //Debug.Log("Destroy " + pooledObject.name);
     }
 
     #endregion
@@ -139,6 +158,72 @@ public class PoolManager : MonoBehaviour
         foreach (EnemySpawnEntry weightedEnemy in currentEnemyPool)
         {
             ClearUnusedPool(weightedEnemy.prefab.gameObject);
+        }
+    }
+
+    #region Cleanup
+
+    public void TryRemoveInactivePools()
+    {
+        HashSet<IObjectPool<GameObject>> activePools = new();
+
+        // Collects all active pools
+        foreach (var kvp in instanceMap)
+        {
+            GameObject instance = kvp.Key;
+            PooledObject pooledObj = kvp.Value;
+
+            if (instance != null && instance.activeInHierarchy && pooledObj != null)
+            {
+                IObjectPool<GameObject> origin = pooledObj.GetOriginPool();
+                if (origin != null)
+                {
+                    activePools.Add(origin);
+                }
+            }
+        }
+
+        // Find the keys (prefabs) that coresponds to inactive pools
+        List<GameObject> prefabsToRemove = new();
+        List<IObjectPool<GameObject>> poolsToClear = new();
+
+        foreach (var kvp in pools)
+        {
+            GameObject prefab = kvp.Key;
+            IObjectPool<GameObject> pool = kvp.Value;
+
+            if (!activePools.Contains(pool))
+            {
+                prefabsToRemove.Add(prefab);
+                poolsToClear.Add(pool);
+            }
+        }
+
+        // Collects all instances that belong to inactive pools
+        List<GameObject> deadInstancesToUnmap = new();
+        foreach (var kvp in instanceMap)
+        {
+            if (kvp.Value == null || poolsToClear.Contains(kvp.Value.GetOriginPool()))
+            {
+                deadInstancesToUnmap.Add(kvp.Key);
+            }
+        }
+
+        // Clear all instance map entries that have instances belonging to inactive pools
+        foreach (GameObject deadInstance in deadInstancesToUnmap)
+        {
+            instanceMap.Remove(deadInstance);
+        }
+
+        // Dispose and remove the inactive pools
+        foreach (IObjectPool<GameObject> pool in poolsToClear)
+        {
+            pool.Clear(); // Triggers OnDestroyPoolObject on inactive pooled objects
+        }
+
+        foreach (GameObject prefab in prefabsToRemove)
+        {
+            pools.Remove(prefab);
         }
     }
 
@@ -170,4 +255,6 @@ public class PoolManager : MonoBehaviour
             instanceMap.Remove(instance);
         }
     }
+
+    #endregion
 }
