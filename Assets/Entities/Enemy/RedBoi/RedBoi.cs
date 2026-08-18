@@ -4,13 +4,20 @@ public class RedBoi : Enemy
 {
     [SerializeField] private MovementComponent movementComponent;
     [SerializeField] private LifeComponent lifeComponent;
-    
 
 
-    private void Start()
+
+    private void OnEnable()
     {
         lifeComponent.Died += Die;
     }
+
+
+    private void OnDisable()
+    {
+        lifeComponent.Died -= Die;
+    }
+
 
 
     void Update()

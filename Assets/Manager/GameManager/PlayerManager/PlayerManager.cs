@@ -35,5 +35,6 @@ public class PlayerManager : MonoBehaviour
     private void AnnouncePlayerDeath()
     {
         PlayerDied?.Invoke();
+        currentPlayerLifeComponent.Died -= AnnouncePlayerDeath;
     }
 }

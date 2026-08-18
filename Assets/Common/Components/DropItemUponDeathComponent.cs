@@ -9,9 +9,15 @@ public class DropItemUponDeathComponent : MonoBehaviour
 
 
 
-    private void Start()
+    private void OnEnable()
     {
         lifeComponent.Died += DropItems;
+    }
+
+
+    private void OnDisable()
+    {
+        lifeComponent.Died -= DropItems;
     }
 
 

@@ -19,9 +19,15 @@ public class TriangleBullet : MonoBehaviour
     }
 
 
-    private void Start()
+    private void OnEnable()
     {
         hitboxComponent.HitHurtbox += ProcessHitHurtbox;
+    }
+
+
+    private void OnDisable()
+    {
+        hitboxComponent.HitHurtbox -= ProcessHitHurtbox;
     }
 
 

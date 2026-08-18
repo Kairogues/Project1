@@ -16,12 +16,7 @@ public class Projectile : MonoBehaviour, IPoolable
         //    ReleaseToPool(); // Tự chết khi hết time
         // }
     }
-
-
-    private void OnTriggerEnter(Collider other)
-    {
-        ReleaseToPool(); // Tự chết khi chạm mục tiêu
-    }
+    
 
 
     // IPoolable

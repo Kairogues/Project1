@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class OrbBullet : MonoBehaviour
+public class OrbBullet : Projectile
 {
     [SerializeField] private HitboxComponent hitboxComponent;
     [SerializeField] private Rigidbody2D body;
@@ -17,9 +17,15 @@ public class OrbBullet : MonoBehaviour
     }
 
 
-    private void Start()
+    private void OnEnable()
     {
         hitboxComponent.HitHurtbox += ProcessHitHurtbox;
+    }
+
+
+    private void OnDisable()
+    {
+        hitboxComponent.HitHurtbox -= ProcessHitHurtbox;
     }
 
 
@@ -41,6 +47,6 @@ public class OrbBullet : MonoBehaviour
 
     private void SelfDestruct()
     {
-        Destroy(gameObject);
+        pooledObjectComponent.ReleaseToPool();
     }
 }
