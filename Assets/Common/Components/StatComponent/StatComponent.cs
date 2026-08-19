@@ -14,6 +14,7 @@ public class StatComponent : MonoBehaviour
     private void Awake()
     {
         statSet = Instantiate(statSetPrototype);
+        statSet.SetUpStatDictionary();
     }
 
 

@@ -12,6 +12,17 @@ public class StatSet : ScriptableObject
         new Stat(StatType.ARMOR, 0.0f, false, 0.0f),
         new Stat(StatType.MOVEMENT_SPEED, 100.0f, false, 0.0f)
     };
+    private Dictionary<StatType, Stat> statDictionary = new();
+
+
+
+    public void SetUpStatDictionary()
+    {
+        foreach (Stat stat in statList)
+        {
+            statDictionary.Add(stat.GetStatType(), stat);
+        }
+    }
 
 
 
@@ -43,13 +54,13 @@ public class StatSet : ScriptableObject
 
     public Stat GetStatInCurrentList(StatType type)
     {
-        foreach (Stat stat in statList)
+        Stat returnStat = statDictionary[type];
+
+        if (returnStat == null)
         {
-            if (stat.GetStatType() == type)
-            {
-                return stat;
-            }
+            return null;
         }
-        return null;
+        
+        return returnStat;
     }
 }
