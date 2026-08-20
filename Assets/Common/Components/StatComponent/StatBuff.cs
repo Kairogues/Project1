@@ -28,4 +28,13 @@ public class StatBuff
     {
         buffID = ID;
     }
+
+
+
+    public StatBuff(StatType statType, StatBuffType buffType, float buffAmount)
+    {
+        this.statType = statType;
+        this.buffType = buffType;
+        this.buffAmount = buffAmount;
+    }
 }
