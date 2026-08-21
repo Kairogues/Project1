@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class OrbBullet : Projectile
 {
+    private const float TIME_ALIVE = 3.0f;
     [SerializeField] private HitboxComponent hitboxComponent;
     [SerializeField] private Rigidbody2D body;
     [SerializeField] private MovementComponent movementComponent;
@@ -13,19 +14,20 @@ public class OrbBullet : Projectile
     private void Awake()
     {
         movementComponent.SetBody(body);
-        movementComponent.UpdateDirection(transform.right);
     }
 
 
     private void OnEnable()
     {
         hitboxComponent.HitHurtbox += ProcessHitHurtbox;
+        hitboxComponent.HitObstacle += ProcessHitObstacle;
     }
 
 
     private void OnDisable()
     {
         hitboxComponent.HitHurtbox -= ProcessHitHurtbox;
+        hitboxComponent.HitObstacle -= ProcessHitObstacle;
     }
 
 
@@ -39,7 +41,27 @@ public class OrbBullet : Projectile
     }
 
 
+    public override void OnSpawn()
+    {
+        base.OnSpawn();
+        timeAlive = TIME_ALIVE;
+        movementComponent.UpdateDirection(transform.right);
+    }
+
+
+    protected override void ReleaseToPool()
+    {
+        base.ReleaseToPool();
+    }
+
+
     private void ProcessHitHurtbox(HurtboxComponent hurtboxComponent)
+    {
+        SelfDestruct();
+    }
+
+
+    private void ProcessHitObstacle()
     {
         SelfDestruct();
     }
@@ -47,6 +69,6 @@ public class OrbBullet : Projectile
 
     private void SelfDestruct()
     {
-        pooledObjectComponent.ReleaseToPool();
+        ReleaseToPool();
     }
 }

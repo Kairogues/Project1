@@ -4,7 +4,7 @@ using UnityEngine;
 public class WeaponData : ScriptableObject
 {
     [SerializeField] public string weaponName;
-    [SerializeField] public GameObject projectile;
+    [SerializeField] public Projectile projectile;
     [SerializeField] public float cooldown;
     [SerializeField] public Vector3 offset;
 }

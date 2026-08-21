@@ -50,7 +50,7 @@ public class Weapon
         }
 
         // Quaternion spawnRotation = Quaternion.Euler(initRotation);
-        GameManager.Instance.poolManager.Spawn(weaponData.projectile, initPosition + weaponData.offset, initRotation);
+        GameManager.Instance.poolManager.Spawn(weaponData.projectile.gameObject, initPosition + weaponData.offset, initRotation, GameManager.Instance.entityManager.transform);
         nextCanAttackTime = Time.time + weaponData.cooldown;
         //StartCoroutine(CoolingDown());
     }

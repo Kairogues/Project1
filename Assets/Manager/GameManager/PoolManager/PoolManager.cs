@@ -59,6 +59,11 @@ public class PoolManager : MonoBehaviour
             instance.transform.SetParent(parent);
         }
 
+        if (instanceMap.TryGetValue(instance, out PooledObject pooledObj))
+        {
+            pooledObj.TriggerSpawn();
+        }
+
         return instance;
     }
     #endregion
@@ -123,10 +128,13 @@ public class PoolManager : MonoBehaviour
     private void OnGetFromPool(GameObject pooledObject)
     {
         pooledObject.SetActive(true);
+
+        /*
         if (instanceMap.TryGetValue(pooledObject, out PooledObject pooledObj))
         {
             pooledObj.TriggerSpawn();
         }
+        */
 
         //Debug.Log("Get " + pooledObject.name + " from pool");
     }
