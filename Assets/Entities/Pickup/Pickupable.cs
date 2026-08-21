@@ -6,9 +6,9 @@ public class Pickupable : MonoBehaviour, IPoolable
 
 
 
-    private void OnTriggerEnter(Collider other)
+    private void Start()
     {
-        
+        OnDrop();
     }
 
 
@@ -30,19 +30,19 @@ public class Pickupable : MonoBehaviour, IPoolable
     }
 
 
-    protected virtual void OnDrop()
+    public virtual void OnDrop()
     {
         
     }
 
 
-    protected virtual void OnPickup()
+    public virtual void OnPickup()
     {
-        ReleaseToPool();
+        
     }
 
 
-    protected virtual void ProcessPickup()
+    public virtual void ProcessPickup(PickUpItemComponent actor)
     {
         
     }

@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class XPPickup : Pickupable
 {
+    [SerializeField] private int amount;
+
+
     public override void OnSpawn()
     {
         GameManager.Instance.entityManager.RegisterXPOrb(this);
@@ -14,20 +17,26 @@ public class XPPickup : Pickupable
     }
 
     
-    protected override void OnDrop()
+    public override void OnDrop()
     {
         base.OnDrop();
     }
 
 
-    protected override void OnPickup()
+    public override void OnPickup()
     {
-        base.OnPickup();
+        // Turn off hitbox
+        // Play pickup animation
+        // Play SFX
     }
 
 
-    protected override void ProcessPickup()
+    public override void ProcessPickup(PickUpItemComponent actor)
     {
-        base.ProcessPickup();
+        OnPickup();
+
+        GameManager.Instance.playerManager.GainXP(amount);
+
+        ReleaseToPool();
     }
 }

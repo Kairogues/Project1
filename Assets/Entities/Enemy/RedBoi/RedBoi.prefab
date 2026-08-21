@@ -134,7 +134,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11bc556a81620d342a1ad1dbf14b8d79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropItemUponDeathComponent
-  itemsToDrop: []
+  itemsToDrop:
+  - {fileID: 6398523961317722671, guid: 0c72e46d320d1e346b8725583c2f6330, type: 3}
   lifeComponent: {fileID: 2543519075771321424}
 --- !u!212 &3653655367367566065
 SpriteRenderer:

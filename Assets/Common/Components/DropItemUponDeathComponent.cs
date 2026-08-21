@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class DropItemUponDeathComponent : MonoBehaviour
 {
     private const float DROP_DISTANCE = 1.0F;
-    [SerializeField] private List<GameObject> itemsToDrop = new();
+    [SerializeField] private List<Pickupable> itemsToDrop = new();
     [SerializeField] private LifeComponent lifeComponent;
 
 
@@ -28,7 +28,7 @@ public class DropItemUponDeathComponent : MonoBehaviour
             return;
         }
 
-        foreach (GameObject item in itemsToDrop)
+        foreach (Pickupable item in itemsToDrop)
         {
             float randomDisplacementX = Random.Range(-DROP_DISTANCE, DROP_DISTANCE);
             float randomDisplacementY = Random.Range(-DROP_DISTANCE, DROP_DISTANCE);
@@ -39,7 +39,7 @@ public class DropItemUponDeathComponent : MonoBehaviour
                 0f
             );
 
-            Instantiate(item, spawnPosition, transform.rotation);
+            GameManager.Instance.poolManager.Spawn(item.gameObject, spawnPosition, transform.rotation, GameManager.Instance.entityManager.transform);
         }
     }
 }

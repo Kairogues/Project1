@@ -14,6 +14,12 @@ public class PlayerManager : MonoBehaviour
 
     
 
+    public void GainXP(int amount)
+    {
+        playerXPManger.AddXP(amount);    
+    }
+
+
     public void RegisterPlayer(Player player, LifeComponent playerLifeComponent)
     {
         if (currentPlayer == null)

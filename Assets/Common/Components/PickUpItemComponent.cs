@@ -1,15 +1,20 @@
+using System;
 using UnityEngine;
 
 public class PickUpItemComponent : MonoBehaviour
 {
-    void Start()
-    {
-        
-    }
+    public event Action<Pickupable> PickedUpItem;
 
 
-    void Update()
+
+    private void OnTriggerEnter2D(Collider2D pickup)
     {
-        
+        Pickupable pickupable = pickup.GetComponent<Pickupable>();
+
+        if (pickupable != null)
+        {
+            PickedUpItem?.Invoke(pickupable);
+            pickupable.ProcessPickup(this);
+        }
     }
 }

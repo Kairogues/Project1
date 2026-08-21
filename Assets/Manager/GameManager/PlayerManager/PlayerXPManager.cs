@@ -36,6 +36,7 @@ public class PlayerXPManager : MonoBehaviour
 
             LeveledUp?.Invoke(currentLevel);
             // await Task.Run();
+            Debug.Log("Level up! Now in level " + currentLevel);
 
             currentMaxXP = GetXPRequiredForLevelUp(currentLevel + 1);
         }
