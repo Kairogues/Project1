@@ -23,7 +23,7 @@ public class EntityManager : MonoBehaviour
     }
     public void UnregisterEnemy(Enemy enemy)
     {
-        currentMonsterWeight -= enemy.GetSpawnWeight() * 4;
+        currentMonsterWeight -= enemy.GetSpawnWeight();
         currentEnemyList.Remove(enemy);
     }
     // =====================================
@@ -41,12 +41,12 @@ public class EntityManager : MonoBehaviour
     // =====================================
 
     // ============== XP ORB ===============
-    [SerializeField] private List<Pickupable> currentXPOrbList = new();
-    public void RegisterXPOrb(Pickupable xpOrb)
+    [SerializeField] private List<XPPickup> currentXPOrbList = new();
+    public void RegisterXPOrb(XPPickup xpOrb)
     {
         currentXPOrbList.Add(xpOrb);
     }
-    public void UnregisterXPOrb(Pickupable xpOrb)
+    public void UnregisterXPOrb(XPPickup xpOrb)
     {
         currentXPOrbList.Remove(xpOrb);
     }
@@ -83,5 +83,14 @@ public class EntityManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    
+    public void CollectAllXPOrb(PickUpItemComponent actor)
+    {
+        foreach (XPPickup xpOrb in currentXPOrbList)
+        {
+            xpOrb.ProcessPickup(actor);
+        }
     }
 }
